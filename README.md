@@ -2,6 +2,10 @@
 
 A decentralized autonomous organization (DAO) built on Solana that transforms internet memes into tradeable tokens through community voting.
 
+## About
+
+Starting point for the Root5 DAO - now evolved into a full-featured Next.js application with Solana blockchain integration.
+
 ## Features
 
 - **Wallet Integration**: Connect with Solana wallets (Phantom, Solflare, Torus)
@@ -9,6 +13,7 @@ A decentralized autonomous organization (DAO) built on Solana that transforms in
 - **Proposal System**: Create proposals for meme tokenization (requires 10 tokens)
 - **Voting Mechanism**: Vote on proposals (1 token = 1 vote, tokens are burned)
 - **Professional UI**: Modern, responsive design with glass effects and animations
+- **Real Meme Integration**: Features authentic Doge, Wojak, and Pepe memes
 
 ## Tech Stack
 
@@ -41,21 +46,21 @@ src/
 ├── app/                    # Next.js app router pages
 │   ├── create/            # Create proposal page
 │   ├── proposals/         # View proposals page
-│   ├── verify/           # Token verification page
-│   ├── vote/             # Voting page
-│   └── page.tsx          # Homepage
-├── components/           # React components
-│   ├── Header.tsx        # Navigation header
+│   ├── verify/            # Token verification page
+│   ├── vote/              # Voting page
+│   └── page.tsx           # Homepage
+├── components/            # React components
+│   ├── Header.tsx         # Navigation header
 │   ├── TokenVerification.tsx
 │   ├── CreateProposal.tsx
 │   └── ProposalsList.tsx
-├── hooks/                # Custom React hooks
+├── hooks/                 # Custom React hooks
 │   ├── useTokenBalance.ts
 │   ├── useVoting.ts
 │   └── useProposals.ts
-├── lib/                  # Utility libraries
-│   └── wallet.tsx        # Wallet context provider
-└── types/               # TypeScript type definitions
+├── lib/                   # Utility libraries
+│   └── wallet.tsx         # Wallet context provider
+└── types/                 # TypeScript type definitions
     └── proposal.ts
 ```
 
