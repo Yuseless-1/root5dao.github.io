@@ -4,9 +4,9 @@ import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Cart
 import { Shield, Zap, Users, TrendingUp, Lock, Flame, ChevronDown, ChevronUp, ArrowRight, AlertTriangle } from 'lucide-react';
 
 const Whitepaper = () => {
-  const [expandedSections, setExpandedSections] = useState({});
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
 
-  const toggleSection = (section) => {
+  const toggleSection = (section: string) => {
     setExpandedSections(prev => ({
       ...prev,
       [section]: !prev[section]

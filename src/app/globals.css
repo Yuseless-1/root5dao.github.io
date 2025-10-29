@@ -68,14 +68,39 @@ body {
 
 /* Button styles */
 .btn-primary {
-  @apply bg-green-500 text-black font-medium px-6 py-3 rounded-lg transition-all duration-200 hover:bg-green-400 text-sm;
+  background-color: #22c55e; /* green-500 */
+  color: #000;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+}
+
+.btn-primary:hover {
+  background-color: #4ade80; /* green-400 */
 }
 
 .btn-secondary {
-  @apply border border-gray-600 text-gray-300 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:bg-gray-800 hover:text-white text-sm;
+  border: 1px solid rgb(75, 85, 99); /* gray-600 */
+  color: rgb(209, 213, 219); /* gray-300 */
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+}
+
+.btn-secondary:hover {
+  background-color: rgb(31, 41, 55); /* gray-800 */
+  color: white;
 }
 
 /* Card hover effects */
 .card-hover {
-  @apply transition-all duration-200 hover:bg-gray-800/50;
+  transition: all 0.2s;
+}
+
+.card-hover:hover {
+  background-color: rgba(31, 41, 55, 0.5); /* gray-800/50 */
 }
