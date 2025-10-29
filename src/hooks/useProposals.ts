@@ -85,3 +85,4 @@ export const useProposals = () => {
     error,
   };
 };
+

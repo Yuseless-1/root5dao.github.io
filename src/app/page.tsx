@@ -2,7 +2,7 @@
 
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@/lib/wallet';
-import { Vote, Users, Coins, Shield, Upload, Bolt, ChartLine, Github, Twitter, MessageCircle, Send } from 'lucide-react';
+import { Vote, Users, Coins, Shield, Upload, Bolt, ChartLine, Github, Twitter, Video, Camera, Radio } from 'lucide-react';
 import Link from 'next/link';
 import Header from '@/components/Header';
 
@@ -283,17 +283,41 @@ export default function Home() {
               </div>
               
               <div className="flex justify-center gap-6 mb-8">
-                <Link href="#" className="text-gray-400 hover:text-green-400 transition-colors">
-                  <Twitter className="h-6 w-6" />
+                <Link 
+                  href="https://x.com/root5dao" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-green-400 transition-colors group"
+                  aria-label="Follow us on X (Twitter)"
+                >
+                  <Twitter className="h-6 w-6 group-hover:scale-110 transition-transform duration-200" />
                 </Link>
-                <Link href="#" className="text-gray-400 hover:text-green-400 transition-colors">
-                  <MessageCircle className="h-6 w-6" />
+                <Link 
+                  href="https://tiktok.com/root5dao" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-green-400 transition-colors group"
+                  aria-label="Follow us on TikTok"
+                >
+                  <Video className="h-6 w-6 group-hover:scale-110 transition-transform duration-200" />
                 </Link>
-                <Link href="#" className="text-gray-400 hover:text-green-400 transition-colors">
-                  <Send className="h-6 w-6" />
+                <Link 
+                  href="https://instagram.com/root5dao" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-green-400 transition-colors group"
+                  aria-label="Follow us on Instagram"
+                >
+                  <Camera className="h-6 w-6 group-hover:scale-110 transition-transform duration-200" />
                 </Link>
-                <Link href="#" className="text-gray-400 hover:text-green-400 transition-colors">
-                  <Github className="h-6 w-6" />
+                <Link 
+                  href="https://www.twitch.tv/root5dao" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-green-400 transition-colors group"
+                  aria-label="Watch us on Twitch"
+                >
+                  <Radio className="h-6 w-6 group-hover:scale-110 transition-transform duration-200" />
                 </Link>
               </div>
               
