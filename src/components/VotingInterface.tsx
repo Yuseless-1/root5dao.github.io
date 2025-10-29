@@ -140,39 +140,39 @@ export default function VotingInterface() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header Section */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl sm:text-5xl font-bold gradient-text mb-2">
-            Root5 DAO – VoteBot
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-2">
+            Vote on Memes
           </h1>
           <p className="text-gray-400 text-sm sm:text-base">
-            Community Governance Platform | Powered by Root5 DAO
+            Community voting platform
           </p>
         </div>
 
         {/* Season Info */}
-        <div className="glass-effect rounded-xl p-6 mb-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <div className="glass-effect rounded-lg p-6 mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h2 className="text-2xl font-bold text-white mb-2">Season III - Top 3 Coins</h2>
-              <p className="text-gray-400 text-sm">30/09/2025 – 31/10/2025</p>
+              <h2 className="text-2xl font-bold text-white mb-2">Current Voting Round</h2>
+              <p className="text-gray-400 text-sm">Vote on your favorite memes</p>
             </div>
             <div className="text-center sm:text-right">
               <p className="text-gray-400 text-sm mb-2">Time Remaining:</p>
-              <div className="flex gap-3 text-2xl sm:text-3xl font-bold">
+              <div className="flex gap-3 text-xl sm:text-2xl font-bold">
                 <div className="text-white">
                   <span className="text-green-400">{timeRemaining.days}</span>
-                  <span className="text-gray-500 text-lg"> DAYS</span>
+                  <span className="text-gray-500 text-sm">d</span>
                 </div>
                 <div className="text-white">
                   <span className="text-green-400">{String(timeRemaining.hours).padStart(2, '0')}</span>
-                  <span className="text-gray-500 text-lg"> HRS</span>
+                  <span className="text-gray-500 text-sm">h</span>
                 </div>
                 <div className="text-white">
                   <span className="text-green-400">{String(timeRemaining.minutes).padStart(2, '0')}</span>
-                  <span className="text-gray-500 text-lg"> MIN</span>
+                  <span className="text-gray-500 text-sm">m</span>
                 </div>
                 <div className="text-white">
                   <span className="text-green-400">{String(timeRemaining.seconds).padStart(2, '0')}</span>
-                  <span className="text-gray-500 text-lg"> SEC</span>
+                  <span className="text-gray-500 text-sm">s</span>
                 </div>
               </div>
             </div>
@@ -184,7 +184,7 @@ export default function VotingInterface() {
           {top3Coins.map((coin, index) => (
             <div 
               key={coin.id}
-              className={`glass-effect rounded-xl p-6 border-2 ${borderColors[index]} relative card-hover`}
+              className={`glass-effect rounded-lg p-6 border ${borderColors[index]} relative`}
             >
               {/* Rank Badge */}
               <div className="absolute top-4 left-4 bg-black/50 rounded-full px-3 py-1">
@@ -195,7 +195,7 @@ export default function VotingInterface() {
               {coin.badges && (
                 <div className="absolute top-4 right-4 flex flex-col gap-1">
                   {coin.badges.map((badge, i) => (
-                    <div key={i} className="bg-yellow-500/90 text-black text-xs font-bold px-2 py-1 rounded">
+                    <div key={i} className="bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded">
                       {badge}
                     </div>
                   ))}
@@ -332,7 +332,7 @@ export default function VotingInterface() {
           {MOCK_COINS.map((coin) => (
             <div
               key={coin.id}
-              className="glass-effect rounded-lg p-4 card-hover"
+              className="glass-effect rounded-lg p-4"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4 flex-1">
