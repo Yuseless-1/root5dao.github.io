@@ -1,11 +1,11 @@
 import Header from '@/components/Header';
-import ProposalsList from '@/components/ProposalsList';
+import VotingInterface from '@/components/VotingInterface';
 
 export default function VotePage() {
   return (
     <>
       <Header />
-      <ProposalsList />
+      <VotingInterface />
     </>
   );
 }
