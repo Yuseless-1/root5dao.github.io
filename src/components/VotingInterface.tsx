@@ -184,11 +184,11 @@ export default function VotingInterface() {
           {top3Coins.map((coin, index) => (
             <div 
               key={coin.id}
-              className={`glass-effect rounded-lg p-6 border ${borderColors[index]} relative`}
+              className={`glass-effect rounded-xl p-6 border ${borderColors[index]} relative`}
             >
               {/* Rank Badge */}
-              <div className="absolute top-4 left-4 bg-black/50 rounded-full px-3 py-1">
-                <span className="text-white font-bold text-sm">#{coin.rank}</span>
+              <div className="absolute -top-3 -left-3 bg-gray-900 border border-gray-700 rounded-full px-3 py-1">
+                <span className="text-white font-semibold text-xs">#{coin.rank}</span>
               </div>
 
               {/* Season Badges */}
@@ -203,11 +203,11 @@ export default function VotingInterface() {
               )}
 
               {/* Coin Image */}
-              <div className="mt-8 mb-4 flex justify-center">
+              <div className="mt-6 mb-4 flex justify-center">
                 <img
                   src={coin.imageUrl}
                   alt={coin.name}
-                  className="w-32 h-32 object-cover rounded-lg"
+                  className="w-28 h-28 object-cover rounded-lg border border-gray-700"
                   onError={(e) => {
                     e.currentTarget.src = 'https://via.placeholder.com/128x128/00ff88/0a0a0a/png?text=' + coin.name;
                   }}
@@ -218,13 +218,12 @@ export default function VotingInterface() {
               <h3 className="text-xl font-bold text-white text-center mb-4">{coin.name}</h3>
 
               {/* Vote Count */}
-              <div className="text-center mb-6">
-                <div className="text-3xl font-bold text-green-400 mb-2">{coin.votes}</div>
-                <div className="text-sm text-gray-400">votes</div>
+              <div className="text-center mb-4">
+                <div className="text-2xl font-bold text-green-400">{coin.votes} votes</div>
               </div>
 
               {/* Social Icons */}
-              <div className="flex justify-center gap-4 pt-4 border-t border-gray-700">
+              <div className="flex justify-center gap-4 pt-4 border-t border-gray-800">
                 {coin.socials.telegram && (
                   <a
                     href={coin.socials.telegram}
@@ -268,58 +267,38 @@ export default function VotingInterface() {
         </div>
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap items-center gap-3 mb-6">
+        <div className="flex flex-wrap items-center gap-2 mb-6">
           <button
             onClick={() => setSelectedFilter('1d')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              selectedFilter === '1d' 
-                ? 'bg-gray-800 text-white border border-gray-700' 
-                : 'bg-gray-800/50 text-gray-400 hover:text-white'
-            }`}
+            className={`pill text-sm ${selectedFilter === '1d' ? 'pill-active' : ''}`}
           >
             1d
           </button>
           <button
             onClick={() => setSelectedFilter('7d')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              selectedFilter === '7d' 
-                ? 'bg-gray-800 text-white border border-gray-700' 
-                : 'bg-gray-800/50 text-gray-400 hover:text-white'
-            }`}
+            className={`pill text-sm ${selectedFilter === '7d' ? 'pill-active' : ''}`}
           >
             7d
           </button>
           <button
             onClick={() => setSelectedFilter('30d')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              selectedFilter === '30d' 
-                ? 'bg-gray-800 text-white border border-gray-700' 
-                : 'bg-gray-800/50 text-gray-400 hover:text-white'
-            }`}
+            className={`pill text-sm ${selectedFilter === '30d' ? 'pill-active' : ''}`}
           >
             30d
           </button>
           <button
             onClick={() => setSelectedFilter('Overall')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              selectedFilter === 'Overall' 
-                ? 'bg-gray-800 text-white border border-gray-700' 
-                : 'bg-gray-800/50 text-gray-400 hover:text-white'
-            }`}
+            className={`pill text-sm ${selectedFilter === 'Overall' ? 'pill-active' : ''}`}
           >
             Overall
           </button>
           <button
             onClick={() => setSelectedCategory('Newcomer')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              selectedCategory === 'Newcomer' 
-                ? 'bg-gray-800 text-white border border-gray-700' 
-                : 'bg-gray-800/50 text-gray-400 hover:text-white'
-            }`}
+            className={`pill text-sm ${selectedCategory === 'Newcomer' ? 'pill-active' : ''}`}
           >
             Newcomer
           </button>
-          <select className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-800/50 text-gray-400 border border-gray-700 hover:text-white transition-colors">
+          <select className="pill bg-transparent text-sm">
             <option>Seasons</option>
             <option>Season I</option>
             <option>Season II</option>

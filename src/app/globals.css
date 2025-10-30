@@ -23,6 +23,26 @@ body {
   overflow-x: hidden;
 }
 
+/* Type scale */
+.heading {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.subheading {
+  color: #9ca3af; /* gray-400 */
+}
+
+/* Pills */
+.pill {
+  padding: 0.5rem 0.875rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #9ca3af;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.pill:hover { color: #e5e7eb; border-color: rgba(255,255,255,0.16); }
+.pill-active { background: #111827; /* gray-900 */ color: #fff; border-color: #374151; /* gray-700 */ }
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -52,6 +72,7 @@ body {
 .glass-effect {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
 }
 
 .glass-effect:hover {
