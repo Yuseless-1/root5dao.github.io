@@ -1,0 +1,4 @@
+[submodule "root5-dao-app"]
+	path = root5-dao-app
+	url = https://github.com/Yuseless-1/rootsdao.github.io.git
+
