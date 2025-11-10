@@ -324,9 +324,12 @@ See the [Whitepaper](./src/components/Whitepaper.tsx) for complete risk disclosu
 ## 📞 Support & Community
 
 - **Website**: [https://www.rootsdao.com](https://www.rootsdao.com)
-- **Twitter**: [@rootsdao](https://x.com/rootsdao)
-- **Discord**: [Join our Discord](https://discord.gg/rootsdao)
-- **Telegram**: [Join our Telegram](https://t.me/rootsdao)
+- **Reddit**: [r/root5daocom](https://reddit.com/r/root5daocom)
+- **X (Twitter)**: [Follow us on X](https://x.com/i/communities/1986508224624009710)
+- **TikTok**: [@root5daocom](https://tiktok.com/root5daocom)
+- **Instagram**: [@root5daocom](http://instagram.com/root5daocom)
+- **Twitch**: [Watch us on Twitch](https://www.twitch.tv/root5dao)
+- **Telegram**: [Join our Telegram](https://t.me/+Thjq7FzYysczYWI5)
 
 ## 🙏 Acknowledgments
 
