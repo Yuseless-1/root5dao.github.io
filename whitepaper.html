@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Root5DAO - The Democratized Meme Credit Union</title>
+    <title>RootsDAO - The Democratized Meme Credit Union</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {
@@ -79,9 +79,25 @@
             margin-bottom: 16px;
         }
         
+        h4 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            margin-top: 24px;
+        }
+        
         p {
             margin-bottom: 16px;
             font-size: 16px;
+        }
+        
+        ul {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        
+        li {
+            margin-bottom: 8px;
         }
         
         .card {
@@ -121,6 +137,14 @@
             font-weight: 600;
         }
         
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+        
         @media (max-width: 768px) {
             h1 { font-size: 48px; }
             .subtitle { font-size: 20px; }
@@ -132,7 +156,7 @@
     <div class="hero">
         <div class="container">
             <div class="badge">The Democratized Meme Credit Union • Whitepaper v1.0</div>
-            <h1>Root5DAO</h1>
+            <h1>RootsDAO</h1>
             <p class="subtitle">The First Democratized Meme Credit Union on Solana</p>
         </div>
     </div>
@@ -142,7 +166,7 @@
         <div class="container">
             <h2>Abstract</h2>
             <div class="card">
-                <p>Root5DAO is a decentralized autonomous organization designed to become the premier democratized meme credit union for community-driven meme tokens on Solana. By leveraging a unique two-tiered governance model—token locking for access rights and token burning for voting power—Root5DAO creates a deflationary ecosystem where value accrues to holders through supply reduction and revenue generation.</p>
+                <p>RootsDAO is a decentralized autonomous organization designed to become the premier democratized meme credit union for community-driven meme tokens on Solana. By leveraging a unique two-tiered governance model—token locking for access rights and token burning for voting power—RootsDAO creates a deflationary ecosystem where value accrues to holders through supply reduction and revenue generation.</p>
             </div>
         </div>
     </section>
@@ -152,33 +176,40 @@
         <div class="container">
             <h2>1. The Meme Ecosystem Problem</h2>
             <p>The meme coin space represents one of crypto's most vibrant yet problematic sectors. While meme tokens have created billions in market value and passionate communities, they suffer from fundamental structural issues including centralized control, lack of sustainability, and zero formal incubation.</p>
-            <p><strong>Root5DAO solves this by creating a transparent, democratic, and economically sustainable credit union where the community itself makes collective investment decisions.</strong></p>
+            <p><strong>RootsDAO solves this by creating a transparent, democratic, and economically sustainable credit union where the community itself makes collective investment decisions.</strong></p>
         </div>
     </section>
 
     <!-- Section 2 -->
     <section>
         <div class="container">
-            <h2>2. The ROOT5 Token & Governance</h2>
+            <h2>2. The ROOTS Token & Governance</h2>
             
             <div class="card">
                 <h3>Token Specifications</h3>
                 <p><strong>Blockchain:</strong> Solana</p>
-                <p><strong>Total Supply:</strong> 1,000,000,000 ROOT5</p>
-                <p><strong>Launch Mechanism:</strong> Fair launch bonding curve via Pump.fun</p>
+                <p><strong>Total Supply:</strong> 1,000,000,000 ROOTS</p>
+                <p><strong>Re-Launch Mechanism:</strong> Fair re-launch via Pump.fun with DAO treasury acquisition</p>
             </div>
             
             <div class="card">
                 <h3>Token Distribution</h3>
-                <p><strong>Initial Structure:</strong> 1 billion ROOT5 tokens minted in Pump.fun liquidity pool. DAO purchases 200M tokens (20%) at launch:</p>
+                <p><strong>Current Structure:</strong> RootsDAO is re-launching with a community-first approach. The DAO will acquire 100M tokens (10%) for the treasury:</p>
                 <div class="chart-container">
                     <canvas id="distributionChart"></canvas>
                 </div>
                 <ul>
-                    <li><strong>80% (800M)</strong> - Pump.fun Public Liquidity Pool</li>
+                    <li><strong>55% (550M)</strong> - Pump.fun Public Liquidity Pool</li>
+                    <li><strong>35% (350M)</strong> - Community Holders</li>
                     <li><strong>10% (100M)</strong> - DAO Treasury</li>
-                    <li><strong>8% (80M)</strong> - Community Airdrop to ROOTS holders</li>
-                    <li><strong>2% (20M)</strong> - Development Team</li>
+                </ul>
+                
+                <h4>Development Team Allocation</h4>
+                <p>To facilitate platform creation, the development team will receive <strong>10% of treasury holdings (10M ROOTS)</strong> distributed over 9 months in 3 separate transactions:</p>
+                <ul>
+                    <li><strong>Month 3:</strong> 3.33M ROOTS (33.3% of development allocation)</li>
+                    <li><strong>Month 6:</strong> 3.33M ROOTS (33.3% of development allocation)</li>
+                    <li><strong>Month 9:</strong> 3.34M ROOTS (33.4% of development allocation)</li>
                 </ul>
             </div>
             
@@ -187,12 +218,12 @@
                 <h4>Tier 1: Access Rights (Locking)</h4>
                 <p>Lock tokens to gain governance access. Locked tokens remain in your ownership.</p>
                 <ul>
-                    <li><strong>Vote on Proposals:</strong> Lock 5,000 ROOT5 for at least 1 week before vote and for more than 30 days</li>
-                    <li><strong>Submit Proposals:</strong> Lock 10,000 ROOT5 for at least 1 week before submission and for more than 30 days</li>
+                    <li><strong>Vote on Proposals:</strong> Lock 5,000 ROOTS for at least 1 week before vote and for more than 30 days</li>
+                    <li><strong>Submit Proposals:</strong> Lock 10,000 ROOTS for at least 1 week before submission and for more than 30 days</li>
                 </ul>
                 
                 <h4>Tier 2: Voting Power (Burning)</h4>
-                <p><strong>1 ROOT5 = 1 Vote</strong> - Burned tokens are permanently removed from circulation.</p>
+                <p><strong>1 ROOTS = 1 Vote</strong> - Burned tokens are permanently removed from circulation.</p>
             </div>
         </div>
     </section>
@@ -204,24 +235,27 @@
             
             <div class="card">
                 <h3>Pump.fun Dynamic Creator Fees</h3>
-                <p>Root5DAO captures creator fees from launched tokens:</p>
+                <p>RootsDAO captures creator fees from launched tokens based on market capitalization:</p>
                 <ul>
-                    <li><strong>0.95%</strong> - Early Stage (Market cap &lt; $300K)</li>
+                    <li><strong>0.95%</strong> - Early Stage (Market cap < $300K)</li>
                     <li><strong>0.5-0.7%</strong> - Growth Stage ($300K - $1M)</li>
                     <li><strong>Scaled</strong> - Maturity ($1M - $20M)</li>
-                    <li><strong>0.05%</strong> - Mega Cap (&gt; $20M)</li>
+                    <li><strong>0.05%</strong> - Mega Cap (> $20M)</li>
                     <li><strong>0.5 SOL</strong> - Graduation bonus per token</li>
                 </ul>
             </div>
             
             <div class="card">
-                <h3>Fee Allocation by Phase</h3>
+                <h3>Fee Allocation Strategy</h3>
+                <p>Revenue from creator fees is allocated to support the DAO ecosystem:</p>
                 <div class="chart-container">
                     <canvas id="feeChart"></canvas>
                 </div>
-                <p><strong>Phase 1 (launch-Bonding):</strong> 50% Buyback to add liquidity, 50% Development</p>
-                <p><strong>Phase 2 (Bonding to Platform Launch):</strong> 40% liquidity, 50% Development, 10% Marketing</p>
-                <p><strong>Phase 3 (Post Platform):</strong> 50% Treasury, 50% "Staking" For holders</p>
+                <ul>
+                    <li><strong>50% Treasury:</strong> Funds DAO operations and community initiatives</li>
+                    <li><strong>30% Buyback:</strong> Market support and liquidity enhancement</li>
+                    <li><strong>20% Staking Rewards:</strong> Distribution to token holders</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -232,11 +266,9 @@
             <h2>4. Economic Security & Attack Mitigation</h2>
             
             <div class="card">
-                <h3>Attack Vector : Whale Domination</h3>
-                <p><strong>Progressive Vote Decay</strong> - Voting power diminishes with concentration:</p>
-                <div class="chart-container">
-                    <canvas id="decayChart"></canvas>
-                </div>
+                <h3>Attack Vector: Whale Domination</h3>
+                <h4>Progressive Vote Decay</h4>
+                <p>Voting power diminishes with concentration:</p>
                 <ul>
                     <li>First 10K tokens: 1.0x multiplier</li>
                     <li>10K-50K: 0.8x multiplier</li>
@@ -245,16 +277,20 @@
                     <li>500K+: 0.2x multiplier</li>
                 </ul>
                 <p><em>Example: Burning 1M tokens yields only 352K effective votes (35% efficiency)</em></p>
+                
+                <div class="chart-container">
+                    <canvas id="decayChart"></canvas>
+                </div>
             </div>
             
             <div class="card">
-                <h3>Attack Vector : Sybil Attacks</h3>
-                <p>Multiple wallets are economically irrational due to per-wallet locking requirements (50 wallets = 250,000 ROOT5 locked vs 5,000 for single wallet)</p>
+                <h3>Attack Vector: Sybil Attacks</h3>
+                <p>Multiple wallets are economically irrational due to per-wallet locking requirements (50 wallets = 250,000 ROOTS locked vs 5,000 for single wallet)</p>
             </div>
             
             <div class="card">
-                <h3>Attack Vector : Meme Virality Verification</h3>
-                <p><strong>Three-Phase Approach:</strong></p>
+                <h3>Attack Vector: Meme Virality Verification</h3>
+                <h4>Three-Phase Approach:</h4>
                 <ul>
                     <li><strong>Phase 1 (Mo 1-6):</strong> Community curation and Platform Development</li>
                     <li><strong>Phase 2 (Mo 7-12):</strong> Reputation-weighted voting</li>
@@ -267,50 +303,19 @@
     <!-- Section 5 -->
     <section class="alt">
         <div class="container">
-            <h2>5. Community Airdrop: The ROOTS Migration</h2>
+            <h2>5. The Re-Launch: Rising from the Roots</h2>
             
             <div class="card">
                 <h3>The Story</h3>
-                <p>Root5DAO emerges from the community of "Roots," a previous project that was discontinued when its original developer departed. The airdrop rewards those who stayed loyal, making them founding members of this democratized meme credit union.</p>
-            </div>
-            
-            <div class="card">
-                <h3>Airdrop Details</h3>
+                <p>RootsDAO represents the rebirth of the Roots community. When the original developer departed, the community refused to let the project die. This re-launch transforms Roots into a true democratized meme credit union where the community—not a single developer—controls the future.</p>
+                
+                <h3>Why Re-Launch?</h3>
                 <ul>
-                    <li><strong>Snapshot Date:</strong> October 29, 2025 (00:00 UTC)</li>
-                    <li><strong>Allocation Formula:</strong> ROOT5 = ROOTS × 0.5</li>
-                    <li><strong>Total Allocation:</strong> 80,000,000 ROOT5</li>
+                    <li><strong>Community Ownership:</strong> Transfer control from individual to collective</li>
+                    <li><strong>Sustainable Model:</strong> Revenue generation through meme token launches</li>
+                    <li><strong>True Decentralization:</strong> Democratic governance with anti-whale protections</li>
+                    <li><strong>Proven Community:</strong> Loyal holders who stayed through adversity</li>
                 </ul>
-                
-                <h4>Example Calculations</h4>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ROOTS Holdings</th>
-                            <th>ROOT5 Airdrop</th>
-                            <th>% of Supply</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>100,000</td>
-                            <td><strong>50,000</strong></td>
-                            <td>0.005%</td>
-                        </tr>
-                        <tr>
-                            <td>1,000,000</td>
-                            <td><strong>500,000</strong></td>
-                            <td>0.05%</td>
-                        </tr>
-                        <tr>
-                            <td>10,000,000</td>
-                            <td><strong>5,000,000</strong></td>
-                            <td>0.5%</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <p><strong>Important:</strong> This is NOT a token swap. ROOTS tokens remain unchanged. ROOT5 is distributed IN ADDITION to existing ROOTS holdings.</p>
             </div>
         </div>
     </section>
@@ -326,7 +331,7 @@
                     <div>
                         <h4>Smart Contracts</h4>
                         <ul>
-                            <li>ROOT5 SPL Token (via Pump.fun)</li>
+                            <li>ROOTS SPL Token (via Pump.fun)</li>
                             <li>Token Locking Contract</li>
                             <li>Voting & Proposal System</li>
                             <li>PDA Treasury Management</li>
@@ -349,10 +354,10 @@
             <div class="card">
                 <h3>Development Roadmap</h3>
                 
-                <h4>Week 1-2 (November 2025) - Genesis Launch</h4>
+                <h4>Week 1-2 (November 2025) - Re-Launch & Foundation</h4>
                 <ul>
-                    <li>ROOT5 fair launch on Pump.fun</li>
-                    <li>Community airdrop execution</li>
+                    <li>ROOTS re-launch announcement</li>
+                    <li>DAO treasury acquisition (100M ROOTS)</li>
                     <li>Token locking contract deployment</li>
                     <li>Governance website launch</li>
                 </ul>
@@ -362,7 +367,7 @@
                     <li>Full voting dApp launch</li>
                     <li>First governance proposals</li>
                     <li>Security audit completion</li>
-                    <li>Community growth campaigns</li>
+                    <li>First development team distribution (3.33M ROOTS)</li>
                 </ul>
                 
                 <h4>Month 4-6 (Feb - Apr 2026) - Credit Union Expansion</h4>
@@ -370,15 +375,21 @@
                     <li>First community-approved meme launches</li>
                     <li>Revenue generation begins</li>
                     <li>Reputation system deployment</li>
-                    <li>PDA treasury transition start</li>
+                    <li>Second development team distribution (3.33M ROOTS)</li>
                 </ul>
                 
-                <h4>Month 7+ (May 2026+) - Full Decentralization</h4>
+                <h4>Month 7-9 (May - Jul 2026) - Full Decentralization</h4>
                 <ul>
                     <li>Complete PDA treasury control</li>
                     <li>Advanced governance features</li>
+                    <li>Final development team distribution (3.34M ROOTS)</li>
+                </ul>
+                
+                <h4>Month 10+ (Aug 2026+) - Ecosystem Growth</h4>
+                <ul>
                     <li>Multi-chain exploration</li>
-                    <li>Root5DAO Launchpad development</li>
+                    <li>RootsDAO Launchpad development</li>
+                    <li>Strategic partnerships</li>
                 </ul>
             </div>
         </div>
@@ -390,7 +401,9 @@
             <h2>7. Risk Disclosures</h2>
             
             <div class="card">
-                <p><strong>⚠️ Important Notice:</strong> Participation in Root5DAO involves significant risks. Only participate with funds you can afford to lose entirely.</p>
+                <div class="warning-box">
+                    <p><strong>⚠️ Important Notice:</strong> Participation in RootsDAO involves significant risks. Only participate with funds you can afford to lose entirely.</p>
+                </div>
                 
                 <h4>Key Risks Include:</h4>
                 <ul>
@@ -412,15 +425,15 @@
             <h2>8. Conclusion: Building the Democratized Meme Credit Union</h2>
             
             <div class="card">
-                <p>Root5DAO represents a paradigm shift in how meme tokens are created, curated, and sustained. By combining deflationary tokenomics with democratic governance and sustainable revenue generation, we've built a credit union where creativity meets collective accountability.</p>
+                <p>RootsDAO represents a paradigm shift in how meme tokens are created, curated, and sustained. By combining deflationary tokenomics with democratic governance and sustainable revenue generation, we've built a credit union where creativity meets collective accountability.</p>
                 
-                <p><strong>We are not launching another meme coin—we are building a democratized credit union where members collectively invest in meme culture.</strong></p>
+                <p><strong>We are not launching another meme coin—we are re-launching a community-owned democratized credit union where members collectively invest in meme culture.</strong></p>
                 
                 <h3>Key Features:</h3>
                 <ul>
                     <li><strong>Economic Sustainability:</strong> Continuous revenue funding treasury and buybacks</li>
                     <li><strong>True Decentralization:</strong> Anti-whale protections and fair governance</li>
-                    <li><strong>Members First:</strong> Airdrop rewards founding members</li>
+                    <li><strong>Community First:</strong> Built by the community, for the community</li>
                     <li><strong>Aligned Incentives:</strong> Success benefits all token holders</li>
                 </ul>
                 
@@ -437,14 +450,14 @@
         <div class="container">
             <div class="card">
                 <h3>Legal Disclaimer</h3>
-                <p style="font-size: 14px;">This whitepaper is for informational purposes only and does not constitute financial, investment, legal, or tax advice. ROOT5 tokens are utility tokens for governance purposes. Participation involves significant risks including potential loss of all invested capital. Users should conduct their own research and consult with professionals. Root5DAO operates as an unincorporated association without formal legal entity status.</p>
+                <p style="font-size: 14px;">This whitepaper is for informational purposes only and does not constitute financial, investment, legal, or tax advice. ROOTS tokens are utility tokens for governance purposes. Participation involves significant risks including potential loss of all invested capital. Users should conduct their own research and consult with professionals. RootsDAO operates as an unincorporated association without formal legal entity status.</p>
             </div>
             
-            <p><strong>Root5DAO</strong></p>
+            <p><strong>RootsDAO</strong></p>
             <p>The Democratized Meme Credit Union • Whitepaper v1.0</p>
             <p>Built on Solana • Powered by Members</p>
             <p style="margin-top: 16px;">
-                <a href="https://www.root5dao.com" style="color: #6b7280; text-decoration: none;">Website</a> | 
+                <a href="https://www.rootsdao.com" style="color: #6b7280; text-decoration: none;">Website</a> | 
                 <a href="#" style="color: #6b7280; text-decoration: none;">Twitter</a> | 
                 <a href="#" style="color: #6b7280; text-decoration: none;">Discord</a> | 
                 <a href="#" style="color: #6b7280; text-decoration: none;">Telegram</a>
@@ -453,82 +466,83 @@
     </footer>
 
     <script>
-        // Distribution Chart
+        // Distribution Chart - Updated for re-launch
         new Chart(document.getElementById('distributionChart'), {
             type: 'pie',
             data: {
-                labels: ['Pump.fun Liquidity (80%)', 'Airdrop (10%)', 'Treasury (8%)', 'Team (2%)'],
+                labels: ['Pump.fun Liquidity (55%)', 'Community Holders (35%)', 'DAO Treasury (10%)'],
                 datasets: [{
-                    data: [80, 10, 8, 2],
-                    backgroundColor: ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b']
+                    data: [55, 35, 10],
+                    backgroundColor: ['#3b82f6', '#8b5cf6', '#10b981']
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { position: 'bottom' } }
+                plugins: { 
+                    legend: { 
+                        position: 'bottom',
+                        labels: {
+                            font: { size: 14 },
+                            padding: 15
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                const amounts = ['550M ROOTS', '350M ROOTS', '100M ROOTS'];
+                                label += amounts[context.dataIndex];
+                                return label;
+                            }
+                        }
+                    }
+                }
             }
         });
 
-        // Revenue Chart
-        new Chart(document.getElementById('revenueChart'), {
-            type: 'line',
-            data: {
-                labels: ['M1', 'M2', 'M3', 'M6', 'M9', 'M12'],
-                datasets: [{
-                    label: 'Bull',
-                    data: [800, 1500, 2400, 3800, 5200, 6800],
-                    borderColor: '#10b981',
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                    fill: true
-                }, {
-                    label: 'Base',
-                    data: [300, 550, 850, 1200, 1600, 2000],
-                    borderColor: '#06b6d4',
-                    backgroundColor: 'rgba(6, 182, 212, 0.1)',
-                    fill: true
-                }, {
-                    label: 'Conservative',
-                    data: [100, 180, 250, 400, 500, 600],
-                    borderColor: '#8b5cf6',
-                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-
-        // Fee Allocation Chart
+        // Fee Allocation Chart - Simplified
         new Chart(document.getElementById('feeChart'), {
             type: 'bar',
             data: {
-                labels: ['Phase 1', 'Phase 2', 'Phase 3'],
+                labels: ['Treasury', 'Buyback', 'Staking Rewards'],
                 datasets: [{
-                    label: 'Treasury',
-                    data: [50, 40, 35],
-                    backgroundColor: '#10b981'
-                }, {
-                    label: 'Buyback',
-                    data: [30, 25, 30],
-                    backgroundColor: '#8b5cf6'
-                }, {
-                    label: 'Other',
-                    data: [20, 35, 35],
-                    backgroundColor: '#06b6d4'
+                    label: 'Allocation %',
+                    data: [50, 30, 20],
+                    backgroundColor: ['#10b981', '#ef4444', '#f59e0b']
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: { x: { stacked: true }, y: { stacked: true, max: 100 } }
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + '% of Revenue';
+                            }
+                        }
+                    }
+                },
+                scales: { 
+                    y: { 
+                        beginAtZero: true, 
+                        max: 60,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    } 
+                }
             }
         });
 
-        // Decay Chart
+        // Progressive Vote Decay Chart
         new Chart(document.getElementById('decayChart'), {
             type: 'line',
             data: {
@@ -536,18 +550,53 @@
                 datasets: [{
                     label: 'Tokens Burned',
                     data: [10, 50, 100, 200, 500, 1000],
-                    borderColor: '#06b6d4'
+                    borderColor: '#06b6d4',
+                    borderDash: [5, 5],
+                    borderWidth: 2,
+                    pointRadius: 0
                 }, {
-                    label: 'Effective Votes',
+                    label: 'Effective Votes (with decay)',
                     data: [10, 42, 72, 132, 252, 352],
-                    borderColor: '#8b5cf6',
-                    borderWidth: 3
+                    borderColor: '#ef4444',
+                    borderWidth: 3,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#ef4444'
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true } }
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: { size: 14 },
+                            padding: 15
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.dataset.label || '';
+                                const value = context.parsed.y + 'K';
+                                if (context.datasetIndex === 1) {
+                                    const efficiency = Math.round((context.parsed.y / [10, 50, 100, 200, 500, 1000][context.dataIndex]) * 100);
+                                    return label + ': ' + value + ' (' + efficiency + '% efficiency)';
+                                }
+                                return label + ': ' + value;
+                            }
+                        }
+                    }
+                },
+                scales: { 
+                    y: { 
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + 'K';
+                            }
+                        }
+                    } 
+                }
             }
         });
     </script>

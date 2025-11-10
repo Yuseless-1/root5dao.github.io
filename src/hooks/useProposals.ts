@@ -14,7 +14,7 @@ export const useProposals = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Replace with your actual token mint address
-  const TOKEN_MINT_ADDRESS = '12fgghtred233455ggreedd';
+  const TOKEN_MINT_ADDRESS = 'AZEqLUaeDb3u6FnGVcLakprwgmk6bD3GPGzNXBZ1pump';
   const PROPOSAL_COST = 10; // Tokens required to create a proposal
 
   const createProposal = async (data: CreateProposalData): Promise<Proposal | null> => {

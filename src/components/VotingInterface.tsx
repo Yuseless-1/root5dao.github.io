@@ -26,7 +26,7 @@ const MOCK_COINS: Coin[] = [
   {
     id: '1',
     name: 'PEPU BANK',
-    imageUrl: 'https://i.imgur.com/8QZ8QZ8.png',
+    imageUrl: '/images.jpeg',
     contractAddress: '0x8214...514c',
     votes: 1088,
     voteChange: 196,
@@ -41,7 +41,7 @@ const MOCK_COINS: Coin[] = [
   {
     id: '2',
     name: 'PEPU VAULT',
-    imageUrl: 'https://i.imgur.com/wojak.png',
+    imageUrl: '/Wojak_cropped.jpg',
     contractAddress: '0x8746...bbe6',
     votes: 950,
     voteChange: 254,
@@ -56,7 +56,7 @@ const MOCK_COINS: Coin[] = [
   {
     id: '3',
     name: 'YASHIX',
-    imageUrl: 'https://i.imgur.com/pepe.png',
+    imageUrl: '/images.jpeg',
     contractAddress: '0x1234...5678',
     votes: 898,
     voteChange: 0,
@@ -70,7 +70,7 @@ const MOCK_COINS: Coin[] = [
   {
     id: '4',
     name: 'DOGE MOON',
-    imageUrl: 'https://i.imgur.com/diamondhands.png',
+    imageUrl: '/Dogecoin-Logo-emblem-of-the-cryptocurrency-transparent-png-image-jpg-768x768.webp',
     contractAddress: '0x9876...abcd',
     votes: 567,
     voteChange: 123,

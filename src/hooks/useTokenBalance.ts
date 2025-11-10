@@ -7,7 +7,7 @@ import { TOKEN_PROGRAM_ID, getAccount } from '@solana/spl-token';
 import { useState, useEffect } from 'react';
 
 // Replace with your actual token mint address
-const TOKEN_MINT_ADDRESS = '12fgghtred233455ggreedd'; // This should be your actual token mint
+const TOKEN_MINT_ADDRESS = 'AZEqLUaeDb3u6FnGVcLakprwgmk6bD3GPGzNXBZ1pump'; // This should be your actual token mint
 
 export interface TokenBalance {
     balance: number;

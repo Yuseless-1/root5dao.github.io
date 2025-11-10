@@ -23,7 +23,7 @@ export default function Header() {
             <div className="glass-effect-subtle rounded-lg p-1.5 group-hover:bg-white/5 transition-all">
               <Vote className="h-5 w-5 sm:h-6 sm:w-6 text-gray-300 group-hover:text-green-400 transition-colors" />
             </div>
-            <span className="text-lg sm:text-xl font-bold text-white tracking-tight">Root5 DAO</span>
+            <span className="text-lg sm:text-xl font-bold text-white tracking-tight">RootsDAO</span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -144,7 +144,7 @@ export default function Header() {
                     </div>
                     <div>
                       <span className="text-white font-bold text-base tracking-tight">Menu</span>
-                      <p className="text-xs text-gray-400 mt-0.5">Root5 DAO</p>
+                      <p className="text-xs text-gray-400 mt-0.5">RootsDAO</p>
                     </div>
                   </div>
                 </div>
@@ -294,7 +294,7 @@ export default function Header() {
                       <div>
                         <div className="text-xs text-gray-400 font-medium mb-0.5">Token Balance</div>
                         <div className="text-base font-bold text-white">
-                          {!loading ? `${tokenBalance.balance.toFixed(2)} ROOT5` : 'Loading...'}
+                          {!loading ? `${tokenBalance.balance.toFixed(2)} ROOTS` : 'Loading...'}
                         </div>
                       </div>
                     </div>
