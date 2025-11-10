@@ -190,12 +190,12 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               <div className="text-center lg:text-left order-2 lg:order-1">
-                <div className="glass-effect rounded-xl p-4 card-hover">
-                  <div className="grid grid-cols-3 gap-2">
+                <div className="glass-effect rounded-xl p-6 sm:p-8 card-hover">
+                  <div className="grid grid-cols-3 gap-3 sm:gap-4">
                     <img
                       src="/Dogecoin-Logo-emblem-of-the-cryptocurrency-transparent-png-image-jpg-768x768.webp"
                       alt="Doge"
-                      className="w-full h-24 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+                      className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
                       onError={(e) => {
                         e.currentTarget.src = 'https://via.placeholder.com/150x100/00ff88/0a0a0a/png?text=Doge';
                       }}
@@ -203,7 +203,7 @@ export default function Home() {
                     <img
                       src="/Wojak_cropped.jpg"
                       alt="Wojak"
-                      className="w-full h-24 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+                      className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
                       onError={(e) => {
                         e.currentTarget.src = 'https://via.placeholder.com/150x100/8a2be2/0a0a0a/png?text=Wojak';
                       }}
@@ -211,15 +211,15 @@ export default function Home() {
                     <img
                       src="/images.jpeg"
                       alt="Pepe"
-                      className="w-full h-24 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+                      className="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
                       onError={(e) => {
                         e.currentTarget.src = 'https://via.placeholder.com/150x100/ff6b6b/0a0a0a/png?text=Pepe';
                       }}
                     />
                   </div>
-                  <div className="mt-4 text-center">
-                    <div className="text-sm text-gray-400 font-semibold">Featured Memes</div>
-                    <div className="text-xs text-gray-500">Doge • Wojak • Pepe</div>
+                  <div className="mt-6 text-center">
+                    <div className="text-base sm:text-lg text-gray-400 font-semibold">Featured Memes</div>
+                    <div className="text-sm text-gray-500 mt-1">Doge • Wojak • Pepe</div>
                   </div>
                 </div>
               </div>
