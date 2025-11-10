@@ -391,7 +391,7 @@ export default function Home() {
               </div>
               
               <div className="border-t border-white/10 pt-6">
-                <p className="text-gray-400 text-sm">© 2024 RootsDAO. All rights reserved.</p>
+                <p className="text-gray-400 text-sm">© 2025 RootsDAO. All rights reserved.</p>
                 <p className="text-gray-500 text-xs mt-2">Built on Solana • Powered by Community</p>
               </div>
             </div>
