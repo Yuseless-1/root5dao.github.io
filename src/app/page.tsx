@@ -6,10 +6,12 @@ import { Vote, Users, Coins, Shield, Upload, Bolt, ChartLine, Github, Twitter, V
 import Link from 'next/link';
 import Header from '@/components/Header';
 import { useTelegramMembers } from '@/hooks/useTelegramMembers';
+import { useTokenHolders } from '@/hooks/useTokenHolders';
 
 export default function Home() {
   const { connected } = useWallet();
-  const { memberCount, loading } = useTelegramMembers();
+  const { memberCount, loading: telegramLoading } = useTelegramMembers();
+  const { holderCount, loading: holdersLoading } = useTokenHolders();
 
   const copyContract = () => {
     const contractAddress = "AZEqLUaeDb3u6FnGVcLakprwgmk6bD3GPGzNXBZ1pump";
@@ -117,17 +119,19 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
               <div className="glass-effect rounded-lg p-4">
                 <div className="text-xl font-bold text-gray-300 mb-1">
-                  {loading ? '...' : memberCount.toLocaleString()}
+                  {telegramLoading ? '...' : memberCount.toLocaleString()}
                 </div>
                 <div className="text-sm text-gray-400">Members</div>
               </div>
               <div className="glass-effect rounded-lg p-4">
-                <div className="text-xl font-bold text-gray-300 mb-1">69</div>
-                <div className="text-sm text-gray-400">Proposals</div>
+                <div className="text-xl font-bold text-gray-300 mb-1">
+                  {holdersLoading ? '...' : holderCount.toLocaleString()}
+                </div>
+                <div className="text-sm text-gray-400">Token Holders</div>
               </div>
               <div className="glass-effect rounded-lg p-4">
-                <div className="text-xl font-bold text-gray-300 mb-1">$1337</div>
-                <div className="text-sm text-gray-400">Volume</div>
+                <div className="text-xl font-bold text-gray-300 mb-1">69</div>
+                <div className="text-sm text-gray-400">Proposals</div>
               </div>
             </div>
           </div>
