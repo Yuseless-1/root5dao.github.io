@@ -36,7 +36,7 @@ export async function GET() {
     }
     
     // Fallback: Use environment variable or default
-    const fallbackCount = process.env.TELEGRAM_MEMBER_COUNT || '420';
+    const fallbackCount = process.env.TELEGRAM_MEMBER_COUNT || '1438';
     
     return NextResponse.json({ 
       count: parseInt(fallbackCount, 10),
@@ -45,7 +45,7 @@ export async function GET() {
   } catch (error) {
     console.error('Error fetching Telegram members:', error);
     return NextResponse.json({ 
-      count: 420,
+      count: 1438,
       source: 'error_fallback'
     }, { status: 200 });
   }

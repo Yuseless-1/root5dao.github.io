@@ -153,7 +153,7 @@ TELEGRAM_BOT_TOKEN=your_bot_token_here
 # Get chat ID by adding @userinfobot to your Telegram group
 TELEGRAM_CHAT_ID=-1001234567890
 # Fallback member count if API is unavailable
-TELEGRAM_MEMBER_COUNT=420
+TELEGRAM_MEMBER_COUNT=1438
 ```
 
 ### Token Contract Setup
@@ -186,7 +186,7 @@ To display live Telegram member count:
 4. **Set Environment Variables**:
    - Add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` to your `.env.local`
    - The member count will update automatically every 5 minutes
-   - If API is unavailable, it falls back to `TELEGRAM_MEMBER_COUNT` (default: 420)
+   - If API is unavailable, it falls back to `TELEGRAM_MEMBER_COUNT` (default: 1438)
 
 **Note**: Without bot credentials, the site will use the fallback count from `TELEGRAM_MEMBER_COUNT` environment variable.
 

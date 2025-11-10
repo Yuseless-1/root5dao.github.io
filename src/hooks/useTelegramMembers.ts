@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 
 export const useTelegramMembers = () => {
-  const [memberCount, setMemberCount] = useState<number>(420); // Default fallback
+  const [memberCount, setMemberCount] = useState<number>(1438); // Default fallback
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
