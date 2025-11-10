@@ -58,7 +58,7 @@ export default function PFPGenerator() {
     hair: 'hair-1',
   });
 
-  const drawPFP = () => {
+  const drawPFP = async () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -71,32 +71,36 @@ export default function PFPGenerator() {
     // Draw layers in order
     const layerOrder: (keyof LayerSelection)[] = ['background', 'body', 'head', 'sunglasses', 'hair'];
     
-    // Load and draw all images
-    let loadedCount = 0;
-    const totalLayers = layerOrder.length;
+    // Load all images first, then draw in order
+    const imagePromises = layerOrder.map((layer) => {
+      return new Promise<HTMLImageElement | null>((resolve) => {
+        const selectedValue = selections[layer];
+        const layerConfig = LAYER_CONFIG[layer];
+        const selectedOption = layerConfig.find(opt => opt.value === selectedValue);
+        
+        if (selectedOption) {
+          const img = new Image();
+          img.crossOrigin = 'anonymous';
+          
+          img.onload = () => resolve(img);
+          img.onerror = () => {
+            console.error(`Error loading ${layer} image:`, selectedOption.image);
+            resolve(null);
+          };
+          
+          img.src = selectedOption.image;
+        } else {
+          resolve(null);
+        }
+      });
+    });
+
+    // Wait for all images to load, then draw them in order
+    const images = await Promise.all(imagePromises);
     
-    layerOrder.forEach((layer) => {
-      const selectedValue = selections[layer];
-      const layerConfig = LAYER_CONFIG[layer];
-      const selectedOption = layerConfig.find(opt => opt.value === selectedValue);
-      
-      if (selectedOption) {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        
-        img.onload = () => {
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          loadedCount++;
-        };
-        
-        img.onerror = (error) => {
-          console.error(`Error loading ${layer} image:`, error);
-          loadedCount++;
-        };
-        
-        img.src = selectedOption.image;
-      } else {
-        loadedCount++;
+    images.forEach((img) => {
+      if (img) {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       }
     });
   };
