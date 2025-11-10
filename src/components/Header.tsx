@@ -125,15 +125,15 @@ export default function Header() {
         }`}>
           {/* Backdrop */}
           <div 
-            className="absolute inset-0 bg-black/50 backdrop-blur-md"
+            className="absolute inset-0 bg-black/90 backdrop-blur-md"
             onClick={() => setMobileMenuOpen(false)}
           ></div>
           
           {/* Main Menu Card */}
-          <div className={`relative mx-4 mt-4 transform transition-all duration-300 ease-out ${
+          <div className={`relative h-full w-full transform transition-all duration-300 ease-out ${
             mobileMenuOpen ? 'translate-y-0 opacity-100 scale-100' : '-translate-y-4 opacity-0 scale-95'
           }`}>
-            <div className="relative glass-effect-strong rounded-2xl shadow-2xl overflow-hidden border border-white/10">
+            <div className="relative h-full w-full glass-effect-strong shadow-2xl overflow-y-auto border-r border-white/10 bg-black/95">
               
               {/* Header */}
               <div className="px-6 py-5 border-b border-white/10 bg-gradient-to-r from-white/5 to-transparent">
