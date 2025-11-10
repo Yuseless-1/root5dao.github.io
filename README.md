@@ -146,6 +146,14 @@ NEXT_PUBLIC_TOKEN_MINT_ADDRESS=your_token_mint_address_here
 
 # RPC Endpoint (optional, uses default if not provided)
 NEXT_PUBLIC_RPC_ENDPOINT=https://api.mainnet-beta.solana.com
+
+# Telegram API (optional - for live member count)
+# Get bot token from @BotFather on Telegram
+TELEGRAM_BOT_TOKEN=your_bot_token_here
+# Get chat ID by adding @userinfobot to your Telegram group
+TELEGRAM_CHAT_ID=-1001234567890
+# Fallback member count if API is unavailable
+TELEGRAM_MEMBER_COUNT=420
 ```
 
 ### Token Contract Setup
@@ -156,6 +164,33 @@ NEXT_PUBLIC_RPC_ENDPOINT=https://api.mainnet-beta.solana.com
    - `src/hooks/useProposals.ts`
 
 2. **Network Configuration**: Update in `src/lib/wallet.tsx`:
+
+### Telegram Member Count Setup (Optional)
+
+To display live Telegram member count:
+
+1. **Create a Telegram Bot**:
+   - Message [@BotFather](https://t.me/BotFather) on Telegram
+   - Send `/newbot` and follow the instructions
+   - Save the bot token you receive
+
+2. **Add Bot to Your Group**:
+   - Add your bot to the Telegram group/channel
+   - Make sure the bot has permission to view member count
+
+3. **Get Chat ID**:
+   - Add [@userinfobot](https://t.me/userinfobot) to your group
+   - It will display the chat ID (usually starts with `-100`)
+   - Or use [@RawDataBot](https://t.me/RawDataBot) and look for `chat.id`
+
+4. **Set Environment Variables**:
+   - Add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` to your `.env.local`
+   - The member count will update automatically every 5 minutes
+   - If API is unavailable, it falls back to `TELEGRAM_MEMBER_COUNT` (default: 420)
+
+**Note**: Without bot credentials, the site will use the fallback count from `TELEGRAM_MEMBER_COUNT` environment variable.
+
+3. **Network Configuration**: Update in `src/lib/wallet.tsx`:
    ```typescript
    const network = WalletAdapterNetwork.Mainnet; // For production
    ```

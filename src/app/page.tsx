@@ -5,9 +5,11 @@ import { WalletMultiButton } from '@/lib/wallet';
 import { Vote, Users, Coins, Shield, Upload, Bolt, ChartLine, Github, Twitter, Video, Camera, Radio } from 'lucide-react';
 import Link from 'next/link';
 import Header from '@/components/Header';
+import { useTelegramMembers } from '@/hooks/useTelegramMembers';
 
 export default function Home() {
   const { connected } = useWallet();
+  const { memberCount, loading } = useTelegramMembers();
 
   const copyContract = () => {
     const contractAddress = "AZEqLUaeDb3u6FnGVcLakprwgmk6bD3GPGzNXBZ1pump";
@@ -114,7 +116,9 @@ export default function Home() {
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
               <div className="glass-effect rounded-lg p-4">
-                <div className="text-xl font-bold text-gray-300 mb-1">420</div>
+                <div className="text-xl font-bold text-gray-300 mb-1">
+                  {loading ? '...' : memberCount.toLocaleString()}
+                </div>
                 <div className="text-sm text-gray-400">Members</div>
               </div>
               <div className="glass-effect rounded-lg p-4">
