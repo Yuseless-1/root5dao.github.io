@@ -7,11 +7,15 @@ import Link from 'next/link';
 import Header from '@/components/Header';
 import { useTelegramMembers } from '@/hooks/useTelegramMembers';
 import { useTokenHolders } from '@/hooks/useTokenHolders';
+import { useProposalCount } from '@/hooks/useProposalCount';
+import { useTokenPrice } from '@/hooks/useTokenPrice';
 
 export default function Home() {
   const { connected } = useWallet();
   const { memberCount, loading: telegramLoading } = useTelegramMembers();
   const { holderCount, loading: holdersLoading } = useTokenHolders();
+  const { proposalCount, loading: proposalsLoading } = useProposalCount();
+  const { priceData, loading: priceLoading } = useTokenPrice();
 
   const copyContract = () => {
     const contractAddress = "AZEqLUaeDb3u6FnGVcLakprwgmk6bD3GPGzNXBZ1pump";
@@ -130,7 +134,9 @@ export default function Home() {
                 <div className="text-sm text-gray-400">Token Holders</div>
               </div>
               <div className="glass-effect rounded-lg p-4">
-                <div className="text-xl font-bold text-gray-300 mb-1">69</div>
+                <div className="text-xl font-bold text-gray-300 mb-1">
+                  {proposalsLoading ? '...' : proposalCount.toLocaleString()}
+                </div>
                 <div className="text-sm text-gray-400">Proposals</div>
               </div>
             </div>
@@ -244,8 +250,18 @@ export default function Home() {
                 
                 <div className="grid grid-cols-2 gap-3">
                   <div className="glass-effect rounded-lg p-3 text-center card-hover">
-                    <div className="text-lg font-semibold text-gray-300 mb-1">$0.001</div>
+                    <div className="text-lg font-semibold text-gray-300 mb-1">
+                      {priceLoading ? '...' : `$${priceData.price.toFixed(6)}`}
+                    </div>
                     <div className="text-xs text-gray-400">Current Price</div>
+                    {!priceLoading && priceData.priceChange24h !== 0 && (
+                      <div className={`text-xs mt-1 ${
+                        priceData.priceChange24h >= 0 ? 'text-green-400' : 'text-red-400'
+                      }`}>
+                        {priceData.priceChange24h >= 0 ? '+' : ''}
+                        {priceData.priceChange24h.toFixed(2)}% (24h)
+                      </div>
+                    )}
                   </div>
                   <div className="glass-effect rounded-lg p-3 text-center card-hover">
                     <div className="text-lg font-semibold text-purple-400 mb-1">1B</div>
