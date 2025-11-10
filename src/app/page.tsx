@@ -9,6 +9,7 @@ import { useTelegramMembers } from '@/hooks/useTelegramMembers';
 import { useTokenHolders } from '@/hooks/useTokenHolders';
 import { useProposalCount } from '@/hooks/useProposalCount';
 import { useTokenPrice } from '@/hooks/useTokenPrice';
+import PFPGeneratorSection from '@/components/PFPGeneratorSection';
 
 export default function Home() {
   const { connected } = useWallet();
@@ -355,6 +356,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* PFP Generator Section */}
+        <PFPGeneratorSection />
 
         {/* Footer */}
         <footer className="py-12 glass-effect-subtle border-t border-white/10">
