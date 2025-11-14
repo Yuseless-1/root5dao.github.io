@@ -270,9 +270,55 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <button className="btn-primary text-base w-full sm:w-auto">
-                  Trade on Pump.fun
-                </button>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    href="https://pump.fun"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary text-base w-full sm:w-auto text-center"
+                  >
+                    Trade on Pump.fun
+                  </a>
+                  <a
+                    href="https://gmgn.ai/sol/token/AZEqLUaeDb3u6FnGVcLakprwgmk6bD3GPGzNXBZ1pump"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary text-base w-full sm:w-auto text-center flex items-center justify-center gap-2"
+                  >
+                    <ChartLine className="h-4 w-4" />
+                    GMGN.ai
+                  </a>
+                  <a
+                    href="https://dexscreener.com/solana/basucpi8m39rs5chbuosta78bptcrjzy2ad6nj2vww6z"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary text-base w-full sm:w-auto text-center flex items-center justify-center gap-2"
+                  >
+                    <ChartLine className="h-4 w-4" />
+                    DexScreener
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Chart Section */}
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Price Chart</h2>
+              <p className="text-base sm:text-lg text-gray-400">Real-time token price and trading data</p>
+            </div>
+            <div className="glass-effect rounded-xl p-4 sm:p-6 overflow-hidden">
+              <div className="w-full" style={{ minHeight: '500px' }}>
+                <iframe
+                  src="https://dexscreener.com/solana/basucpi8m39rs5chbuosta78bptcrjzy2ad6nj2vww6z?embed=1&theme=dark"
+                  width="100%"
+                  height="600"
+                  style={{ border: 'none', borderRadius: '12px' }}
+                  title="DexScreener Chart"
+                />
               </div>
             </div>
           </div>
