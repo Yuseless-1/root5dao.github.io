@@ -7,12 +7,19 @@ import { PhantomWalletAdapter, SolflareWalletAdapter, TorusWalletAdapter } from 
 import {
     WalletModalProvider,
     WalletDisconnectButton,
-    WalletMultiButton
+    WalletMultiButton as WalletMultiButtonBase
 } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
+import dynamic from 'next/dynamic';
 
 // Default styles that can be overridden by your app
 import '@solana/wallet-adapter-react-ui/styles.css';
+
+// Dynamically import WalletMultiButton with no SSR to avoid hydration issues
+export const WalletMultiButton = dynamic(
+    () => import('@solana/wallet-adapter-react-ui').then((mod) => mod.WalletMultiButton),
+    { ssr: false }
+);
 
 interface WalletContextProviderProps {
     children: ReactNode;
@@ -45,4 +52,4 @@ export const WalletContextProvider: FC<WalletContextProviderProps> = ({ children
     );
 };
 
-export { WalletMultiButton, WalletDisconnectButton };
+export { WalletDisconnectButton };

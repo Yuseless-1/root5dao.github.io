@@ -20,8 +20,8 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2.5 group">
-            <div className="glass-effect-subtle rounded-lg p-1.5 group-hover:bg-white/5 transition-all">
-              <Vote className="h-5 w-5 sm:h-6 sm:w-6 text-gray-300 group-hover:text-green-400 transition-colors" />
+            <div className="glass-effect-subtle rounded-lg p-2 group-hover:bg-white/5 transition-all">
+              <img src="/layers/pfp_base.png" alt="RootsDAO Logo" className="h-8 w-8 sm:h-10 sm:w-10 object-contain group-hover:scale-110 transition-transform" />
             </div>
             <span className="text-lg sm:text-xl font-bold text-white tracking-tight">RootsDAO</span>
           </Link>
@@ -139,8 +139,8 @@ export default function Header() {
               <div className="px-6 py-5 border-b border-white/10 bg-gradient-to-r from-white/5 to-transparent">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 glass-effect-strong rounded-xl flex items-center justify-center bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-500/30 shadow-lg">
-                      <Vote className="h-5 w-5 text-green-400" />
+                    <div className="w-14 h-14 glass-effect-strong rounded-xl flex items-center justify-center bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-500/30 shadow-lg p-2">
+                      <img src="/layers/pfp_base.png" alt="RootsDAO Logo" className="w-full h-full object-contain" />
                     </div>
                     <div>
                       <span className="text-white font-bold text-base tracking-tight">Menu</span>

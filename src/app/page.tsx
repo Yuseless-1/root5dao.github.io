@@ -176,8 +176,8 @@ export default function Home() {
               </div>
               
               <div className="glass-effect rounded-xl p-6 text-center">
-                <div className="w-12 h-12 glass-effect-subtle rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Vote className="h-6 w-6 text-gray-300" />
+                <div className="w-16 h-16 glass-effect-subtle rounded-full flex items-center justify-center mx-auto mb-4 p-3">
+                  <img src="/layers/pfp_base.png" alt="Vote" className="w-full h-full object-contain" />
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-3">Vote</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
@@ -402,8 +402,8 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <div className="flex items-center justify-center gap-3 mb-8">
-                <div className="w-10 h-10 glass-effect-subtle rounded-full flex items-center justify-center">
-                  <Vote className="h-5 w-5 text-white" />
+                <div className="w-16 h-16 glass-effect-subtle rounded-full flex items-center justify-center p-2">
+                  <img src="/layers/pfp_base.png" alt="RootsDAO Logo" className="w-full h-full object-contain" />
                 </div>
                 <span className="text-2xl font-bold text-white">RootsDAO</span>
               </div>

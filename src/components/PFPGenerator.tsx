@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Download, Shuffle, Palette } from 'lucide-react';
+import { Download, Shuffle, Palette, Sparkles, Loader2 } from 'lucide-react';
 import Header from './Header';
 
 interface LayerSelection {
@@ -14,36 +14,46 @@ interface LayerSelection {
 
 const LAYER_CONFIG = {
   background: [
-    { value: 'background-1', image: '/layers/background/blue.png', label: 'Background 1' },
-    { value: 'background-2', image: '/layers/background/castle.png', label: 'Background 2' },
-    { value: 'background-3', image: '/layers/background/green.png', label: 'Background 3' },
-    { value: 'background-4', image: '/layers/background/pink.png', label: 'Background 4' },
-    { value: 'background-5', image: '/layers/background/red.png', label: 'Background 5' },
-    { value: 'background-6', image: '/layers/background/sky.png', label: 'Background 6' },
-    { value: 'background-7', image: '/layers/background/white.png', label: 'Background 7' },
-    { value: 'background-8', image: '/layers/background/yellow.png', label: 'Background 8' },
+    { value: 'background-1', image: '/layers/background/blue.png', label: 'Blue' },
+    { value: 'background-2', image: '/layers/background/castle.png', label: 'Castle' },
+    { value: 'background-3', image: '/layers/background/green.png', label: 'Green' },
+    { value: 'background-4', image: '/layers/background/pink.png', label: 'Pink' },
+    { value: 'background-5', image: '/layers/background/red.png', label: 'Red' },
+    { value: 'background-6', image: '/layers/background/sky.png', label: 'Sky' },
+    { value: 'background-7', image: '/layers/background/white.png', label: 'White' },
+    { value: 'background-8', image: '/layers/background/yellow.png', label: 'Yellow' },
   ],
   body: [
-    { value: 'body-1', image: '/layers/body/base.png', label: 'Body 1' },
-    { value: 'body-2', image: '/layers/body/body 1-01.png', label: 'Body 2' },
+    { value: 'body-1', image: '/layers/body/base.png', label: 'Classic' },
+    { value: 'body-2', image: '/layers/body/body 1-01.png', label: 'Alt Classic' },
+    { value: 'body-3', image: '/layers/body/f_base_01.png', label: 'Female 1' },
+    { value: 'body-4', image: '/layers/body/f_base_02.png', label: 'Female 2' },
+    { value: 'body-5', image: '/layers/body/f_base_03.png', label: 'Female 3' },
+    { value: 'body-6', image: '/layers/body/m_base_01.png', label: 'Male 1' },
+    { value: 'body-7', image: '/layers/body/m_base_02.png', label: 'Male 2' },
   ],
   head: [
-    { value: 'head-1', image: '/layers/head/base.png', label: 'Head 1' },
-    { value: 'head-2', image: '/layers/head/face.png', label: 'Head 2' },
-    { value: 'head-3', image: '/layers/head/image.png', label: 'Head 3' },
+    { value: 'head-1', image: '/layers/head/base.png', label: 'Classic' },
+    { value: 'head-2', image: '/layers/head/face.png', label: 'Face' },
+    { value: 'head-3', image: '/layers/head/image.png', label: 'Alt' },
+    { value: 'head-4', image: '/layers/head/f_base_01cheeks.png', label: 'Female Cheeks' },
+    { value: 'head-5', image: '/layers/head/f_base_02.png', label: 'Female 2' },
+    { value: 'head-6', image: '/layers/head/f_base_03.png', label: 'Female 3' },
+    { value: 'head-7', image: '/layers/head/f_base_04.png', label: 'Female 4' },
   ],
   sunglasses: [
     { value: 'sunglasses-1', image: '/layers/sunglasses/nothing.png', label: 'None' },
     { value: 'sunglasses-2', image: '/layers/sunglasses/sunglasses.png', label: 'Sunglasses' },
   ],
   hair: [
-    { value: 'hair-1', image: '/layers/hair/2-done.png', label: 'Hair 1' },
-    { value: 'hair-2', image: '/layers/hair/3-done.png', label: 'Hair 2' },
-    { value: 'hair-3', image: '/layers/hair/4-done.png', label: 'Hair 3' },
-    { value: 'hair-4', image: '/layers/hair/5-done.png', label: 'Hair 4' },
-    { value: 'hair-5', image: '/layers/hair/6-done.png', label: 'Hair 5' },
-    { value: 'hair-6', image: '/layers/hair/base.png', label: 'Hair 6' },
-    { value: 'hair-7', image: '/layers/hair/golden-done.png', label: 'Hair 7' },
+    { value: 'hair-1', image: '/layers/hair/2-done.png', label: 'Style 1' },
+    { value: 'hair-2', image: '/layers/hair/3-done.png', label: 'Style 2' },
+    { value: 'hair-3', image: '/layers/hair/4-done.png', label: 'Style 3' },
+    { value: 'hair-4', image: '/layers/hair/5-done.png', label: 'Style 4' },
+    { value: 'hair-5', image: '/layers/hair/6-done.png', label: 'Style 5' },
+    { value: 'hair-6', image: '/layers/hair/base.png', label: 'Base' },
+    { value: 'hair-7', image: '/layers/hair/golden-done.png', label: 'Golden' },
+    { value: 'hair-8', image: '/layers/hair/f_base_01.png', label: 'Female Base' },
   ],
 };
 
@@ -57,6 +67,9 @@ export default function PFPGenerator() {
     sunglasses: 'sunglasses-1',
     hair: 'hair-1',
   });
+  const [aiPrompt, setAiPrompt] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedImage, setEditedImage] = useState<string | null>(null);
 
   const drawPFP = async () => {
     const canvas = canvasRef.current;
@@ -128,6 +141,17 @@ export default function PFPGenerator() {
   };
 
   const downloadPFP = () => {
+    // If there's an edited image, download that instead
+    if (editedImage) {
+      const link = document.createElement('a');
+      link.href = editedImage;
+      link.download = 'roots-pfp-custom.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -143,6 +167,70 @@ export default function PFPGenerator() {
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
     });
+  };
+
+  const handleAICustomization = async () => {
+    if (!aiPrompt.trim()) {
+      alert('Please enter a prompt to customize your PFP');
+      return;
+    }
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    setIsEditing(true);
+    try {
+      // Convert canvas to blob
+      const blob = await new Promise<Blob>((resolve) => {
+        canvas.toBlob((blob) => {
+          if (blob) resolve(blob);
+        }, 'image/png');
+      });
+
+      // Create form data
+      const formData = new FormData();
+      formData.append('image', blob, 'pfp.png');
+      formData.append('prompt', aiPrompt);
+
+      // Call API
+      const response = await fetch('/api/qwen-edit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        const errorMsg = errorData.error || 'Failed to edit image';
+        
+        // Handle development/unavailable status differently (503)
+        if (response.status === 503) {
+          console.info('AI Feature Status:', errorMsg);
+          alert(errorMsg);
+          return;
+        }
+        
+        throw new Error(errorMsg);
+      }
+
+      const data = await response.json();
+
+      if (data.success && data.editedImage) {
+        setEditedImage(data.editedImage);
+      } else {
+        throw new Error(data.error || 'Failed to edit image');
+      }
+    } catch (error) {
+      console.error('Error customizing PFP:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to customize PFP';
+      alert(errorMessage);
+    } finally {
+      setIsEditing(false);
+    }
+  };
+
+  const resetToOriginal = () => {
+    setEditedImage(null);
+    setAiPrompt('');
   };
 
   return (
@@ -167,13 +255,28 @@ export default function PFPGenerator() {
             <div className="space-y-6">
               <div>
                 <h2 className="text-2xl font-bold text-green-400 mb-4">Preview</h2>
-                <div className="glass-effect rounded-xl p-6 flex justify-center items-center">
-                  <canvas
-                    ref={canvasRef}
-                    width={320}
-                    height={320}
-                    className="w-full max-w-[320px] h-auto rounded-lg border-2 border-green-400/50 shadow-lg shadow-green-400/20"
-                  />
+                <div className="glass-effect rounded-xl p-6 flex justify-center items-center relative">
+                  {editedImage ? (
+                    <img
+                      src={editedImage}
+                      alt="Edited PFP"
+                      className="w-full max-w-[320px] h-auto rounded-lg border-2 border-purple-400/50 shadow-lg shadow-purple-400/20"
+                    />
+                  ) : (
+                    <canvas
+                      ref={canvasRef}
+                      width={320}
+                      height={320}
+                      className="w-full max-w-[320px] h-auto rounded-lg border-2 border-green-400/50 shadow-lg shadow-green-400/20"
+                    />
+                  )}
+                  {editedImage && (
+                    <div className="absolute top-2 right-2">
+                      <span className="bg-purple-500/20 text-purple-300 text-xs px-2 py-1 rounded-full border border-purple-400/50">
+                        AI Customized
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
               
@@ -181,6 +284,7 @@ export default function PFPGenerator() {
                 <button
                   onClick={randomize}
                   className="btn-primary w-full flex items-center justify-center gap-2"
+                  disabled={isEditing}
                 >
                   <Shuffle className="h-5 w-5" />
                   Randomize
@@ -188,10 +292,59 @@ export default function PFPGenerator() {
                 <button
                   onClick={downloadPFP}
                   className="btn-secondary w-full flex items-center justify-center gap-2"
+                  disabled={isEditing}
                 >
                   <Download className="h-5 w-5" />
                   Download PFP
                 </button>
+                
+                {/* AI Customization Section */}
+                <div className="glass-effect rounded-lg p-4 mt-2">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles className="h-5 w-5 text-purple-400" />
+                    <h4 className="text-sm font-semibold text-purple-400">AI Customization</h4>
+                    <span className="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full">Beta</span>
+                  </div>
+                  <p className="text-xs text-gray-400 mb-3">
+                    Experimental AI feature - Generate a new character based on your prompt
+                  </p>
+                  <input
+                    type="text"
+                    value={aiPrompt}
+                    onChange={(e) => setAiPrompt(e.target.value)}
+                    placeholder="e.g., Add sunglasses, change hair color to blue..."
+                    className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 mb-3"
+                    disabled={isEditing}
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      onClick={handleAICustomization}
+                      disabled={isEditing || !aiPrompt.trim()}
+                      className="flex-1 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-400/50 px-3 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                    >
+                      {isEditing ? (
+                        <>
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          Customizing...
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="h-4 w-4" />
+                          Apply AI
+                        </>
+                      )}
+                    </button>
+                    {editedImage && (
+                      <button
+                        onClick={resetToOriginal}
+                        disabled={isEditing}
+                        className="px-3 py-2 bg-gray-700/50 hover:bg-gray-700 text-gray-300 rounded-lg text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        Reset
+                      </button>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
 
