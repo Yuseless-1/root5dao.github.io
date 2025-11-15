@@ -145,12 +145,9 @@ export default function Home() {
             {/* Live Chart */}
             <div className="max-w-5xl mx-auto mt-8">
               <div className="glass-effect rounded-xl p-4 sm:p-6 overflow-hidden">
-                <div className="w-full" style={{ minHeight: '500px' }}>
+                <div id="dexscreener-embed">
                   <iframe
-                    src="https://dexscreener.com/solana/basucpi8m39rs5chbuosta78bptcrjzy2ad6nj2vww6z?embed=1&theme=dark"
-                    width="100%"
-                    height="600"
-                    style={{ border: 'none', borderRadius: '12px' }}
+                    src="https://dexscreener.com/solana/BAsuCpi8M39Rs5cHbuoSTa78bPtcrJZy2ad6NJ2VWW6z?embed=1&loadChartSettings=0&trades=0&tabs=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"
                     title="DexScreener Chart"
                   />
                 </div>

@@ -397,3 +397,25 @@ input:focus, textarea:focus, select:focus {
 .wallet-adapter-modal-button-close:hover {
   background: rgba(255, 255, 255, 0.1) !important;
 }
+
+/* DexScreener Embed Styles */
+#dexscreener-embed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 125%;
+}
+
+@media (min-width: 1400px) {
+  #dexscreener-embed {
+    padding-bottom: 65%;
+  }
+}
+
+#dexscreener-embed iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border: 0;
+}
