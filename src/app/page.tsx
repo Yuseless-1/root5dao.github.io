@@ -90,7 +90,7 @@ export default function Home() {
         </div>
         
         {/* Hero Section */}
-        <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex items-center z-10">
+        <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden z-10">
           <div className="max-w-7xl mx-auto text-center relative z-10">
             <div className="mb-8">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
@@ -121,7 +121,7 @@ export default function Home() {
             </div>
             
             {/* Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-12">
               <div className="glass-effect rounded-lg p-4">
                 <div className="text-xl font-bold text-gray-300 mb-1">
                   {telegramLoading ? '...' : memberCount.toLocaleString()}
@@ -139,6 +139,21 @@ export default function Home() {
                   {proposalsLoading ? '...' : proposalCount.toLocaleString()}
                 </div>
                 <div className="text-sm text-gray-400">Proposals</div>
+              </div>
+            </div>
+
+            {/* Live Chart */}
+            <div className="max-w-5xl mx-auto mt-8">
+              <div className="glass-effect rounded-xl p-4 sm:p-6 overflow-hidden">
+                <div className="w-full" style={{ minHeight: '500px' }}>
+                  <iframe
+                    src="https://dexscreener.com/solana/basucpi8m39rs5chbuosta78bptcrjzy2ad6nj2vww6z?embed=1&theme=dark"
+                    width="100%"
+                    height="600"
+                    style={{ border: 'none', borderRadius: '12px' }}
+                    title="DexScreener Chart"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -298,27 +313,6 @@ export default function Home() {
                     DexScreener
                   </a>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Chart Section */}
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Price Chart</h2>
-              <p className="text-base sm:text-lg text-gray-400">Real-time token price and trading data</p>
-            </div>
-            <div className="glass-effect rounded-xl p-4 sm:p-6 overflow-hidden">
-              <div className="w-full" style={{ minHeight: '500px' }}>
-                <iframe
-                  src="https://dexscreener.com/solana/basucpi8m39rs5chbuosta78bptcrjzy2ad6nj2vww6z?embed=1&theme=dark"
-                  width="100%"
-                  height="600"
-                  style={{ border: 'none', borderRadius: '12px' }}
-                  title="DexScreener Chart"
-                />
               </div>
             </div>
           </div>
