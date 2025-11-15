@@ -147,7 +147,7 @@ export default function Home() {
               <div className="glass-effect rounded-xl p-4 sm:p-6 overflow-hidden">
                 <div id="dexscreener-embed">
                   <iframe
-                    src="https://dexscreener.com/solana/BAsuCpi8M39Rs5cHbuoSTa78bPtcrJZy2ad6NJ2VWW6z?embed=1&loadChartSettings=0&trades=0&tabs=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"
+                    src="https://dexscreener.com/solana/BAsuCpi8M39Rs5cHbuoSTa78bPtcrJZy2ad6NJ2VWW6z?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"
                     title="DexScreener Chart"
                   />
                 </div>
