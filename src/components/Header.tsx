@@ -120,7 +120,7 @@ export default function Header() {
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`md:hidden fixed inset-0 top-16 z-40 transition-all duration-300 ease-out ${
+        <div className={`md:hidden fixed inset-0 top-16 z-[60] transition-all duration-300 ease-out ${
           mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}>
           {/* Backdrop */}
