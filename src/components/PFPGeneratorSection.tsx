@@ -1,7 +1,10 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Download, Shuffle, Palette, Sparkles, Loader2 } from 'lucide-react';
+import { Download, Shuffle, Palette, Sparkles, Loader2, Lock, Flame } from 'lucide-react';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { useTokenBalance } from '@/hooks/useTokenBalance';
+import { useTokenBurn } from '@/hooks/useTokenBurn';
 
 interface LayerSelection {
   background: string;
@@ -57,6 +60,9 @@ const LAYER_CONFIG = {
 };
 
 export default function PFPGeneratorSection() {
+  const { connected, publicKey } = useWallet();
+  const { tokenBalance } = useTokenBalance();
+  const { burnToken, burning } = useTokenBurn();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [activeLayer, setActiveLayer] = useState<keyof LayerSelection>('background');
   const [selections, setSelections] = useState<LayerSelection>({
@@ -69,6 +75,15 @@ export default function PFPGeneratorSection() {
   const [aiPrompt, setAiPrompt] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [editedImage, setEditedImage] = useState<string | null>(null);
+  const [aiUnlocked, setAiUnlocked] = useState(false);
+
+  // Check if user has unlocked AI features (persisted in localStorage)
+  useEffect(() => {
+    if (publicKey) {
+      const unlocked = localStorage.getItem(`ai_unlocked_${publicKey.toString()}`);
+      setAiUnlocked(unlocked === 'true');
+    }
+  }, [publicKey]);
 
   const drawPFP = async () => {
     const canvas = canvasRef.current;
@@ -232,6 +247,34 @@ export default function PFPGeneratorSection() {
     setAiPrompt('');
   };
 
+  const handleUnlockAI = async () => {
+    if (!connected) {
+      alert('Please connect your wallet first');
+      return;
+    }
+
+    if (tokenBalance.balance < 1) {
+      alert('You need at least 1 ROOT5 token to unlock AI customization');
+      return;
+    }
+
+    const confirmed = window.confirm(
+      'Burn 1 ROOT5 token to unlock AI customization forever?\n\nThis will permanently unlock AI features for your wallet.'
+    );
+
+    if (!confirmed) return;
+
+    const success = await burnToken(1);
+
+    if (success && publicKey) {
+      setAiUnlocked(true);
+      localStorage.setItem(`ai_unlocked_${publicKey.toString()}`, 'true');
+      alert('🔥 AI Customization Unlocked! You can now personalize your PFP with AI.');
+    } else {
+      alert('Failed to burn token. Please try again.');
+    }
+  };
+
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -296,51 +339,102 @@ export default function PFPGeneratorSection() {
               </button>
               
               {/* AI Customization Section */}
-              <div className="glass-effect rounded-lg p-4 mt-2">
+              <div className="glass-effect rounded-lg p-4 mt-2 relative">
                 <div className="flex items-center gap-2 mb-3">
                   <Sparkles className="h-5 w-5 text-purple-400" />
                   <h4 className="text-sm font-semibold text-purple-400">AI Customization</h4>
-                  <span className="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full">Beta</span>
+                  <span className="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full">Premium</span>
                 </div>
-                <p className="text-xs text-gray-400 mb-3">
-                  Experimental AI feature - Generate a new character based on your prompt
-                </p>
-                <input
-                  type="text"
-                  value={aiPrompt}
-                  onChange={(e) => setAiPrompt(e.target.value)}
-                  placeholder="e.g., Add sunglasses, change hair color to blue..."
-                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 mb-3"
-                  disabled={isEditing}
-                />
-                <div className="flex gap-2">
-                  <button
-                    onClick={handleAICustomization}
-                    disabled={isEditing || !aiPrompt.trim()}
-                    className="flex-1 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-400/50 px-3 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-                  >
-                    {isEditing ? (
-                      <>
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        Customizing...
-                      </>
-                    ) : (
-                      <>
-                        <Sparkles className="h-4 w-4" />
-                        Apply AI
-                      </>
-                    )}
-                  </button>
-                  {editedImage && (
+
+                {!aiUnlocked ? (
+                  // Locked State - Burn to Unlock
+                  <div className="relative">
+                    <div className="absolute inset-0 backdrop-blur-sm bg-black/30 rounded-lg z-10 flex items-center justify-center">
+                      <Lock className="h-8 w-8 text-gray-400" />
+                    </div>
+                    <div className="filter blur-sm pointer-events-none">
+                      <p className="text-xs text-gray-400 mb-3">
+                        Experimental AI feature - Generate a new character based on your prompt
+                      </p>
+                      <input
+                        type="text"
+                        placeholder="e.g., Add sunglasses, change hair color to blue..."
+                        className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 mb-3"
+                        disabled
+                      />
+                    </div>
                     <button
-                      onClick={resetToOriginal}
-                      disabled={isEditing}
-                      className="px-3 py-2 bg-gray-700/50 hover:bg-gray-700 text-gray-300 rounded-lg text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      onClick={handleUnlockAI}
+                      disabled={!connected || burning}
+                      className="w-full mt-4 bg-gradient-to-r from-orange-500/20 to-red-500/20 hover:from-orange-500/30 hover:to-red-500/30 text-orange-300 border-2 border-orange-400/50 px-4 py-3 rounded-lg font-bold transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed relative z-20"
                     >
-                      Reset
+                      {burning ? (
+                        <>
+                          <Loader2 className="h-5 w-5 animate-spin" />
+                          Burning Token...
+                        </>
+                      ) : (
+                        <>
+                          <Flame className="h-5 w-5" />
+                          Burn 1 ROOT5 Token - Personalize Your PFP
+                        </>
+                      )}
                     </button>
-                  )}
-                </div>
+                    {!connected && (
+                      <p className="text-xs text-center text-gray-500 mt-2">Connect wallet to unlock</p>
+                    )}
+                    {connected && tokenBalance.balance < 1 && (
+                      <p className="text-xs text-center text-orange-400 mt-2">Need at least 1 ROOT5 token</p>
+                    )}
+                  </div>
+                ) : (
+                  // Unlocked State - Normal AI Features
+                  <>
+                    <div className="flex items-center gap-2 bg-green-500/10 border border-green-400/30 rounded-lg p-2 mb-3">
+                      <Sparkles className="h-4 w-4 text-green-400" />
+                      <p className="text-xs text-green-400 font-medium">AI Features Unlocked!</p>
+                    </div>
+                    <p className="text-xs text-gray-400 mb-3">
+                      Experimental AI feature - Generate a new character based on your prompt
+                    </p>
+                    <input
+                      type="text"
+                      value={aiPrompt}
+                      onChange={(e) => setAiPrompt(e.target.value)}
+                      placeholder="e.g., Add sunglasses, change hair color to blue..."
+                      className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 mb-3"
+                      disabled={isEditing}
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={handleAICustomization}
+                        disabled={isEditing || !aiPrompt.trim()}
+                        className="flex-1 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-400/50 px-3 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                      >
+                        {isEditing ? (
+                          <>
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            Customizing...
+                          </>
+                        ) : (
+                          <>
+                            <Sparkles className="h-4 w-4" />
+                            Apply AI
+                          </>
+                        )}
+                      </button>
+                      {editedImage && (
+                        <button
+                          onClick={resetToOriginal}
+                          disabled={isEditing}
+                          className="px-3 py-2 bg-gray-700/50 hover:bg-gray-700 text-gray-300 rounded-lg text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          Reset
+                        </button>
+                      )}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
