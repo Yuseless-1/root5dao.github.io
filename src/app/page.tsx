@@ -94,7 +94,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto text-center relative z-10">
             <div className="mb-8">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
-                RootsDAO
+                Root5DAO
               </h1>
               <div className="text-lg sm:text-xl md:text-2xl font-medium text-gray-300 mb-6">
                 Vote on memes. Turn them into tokens.
@@ -238,7 +238,7 @@ export default function Home() {
               </div>
               <div className="space-y-6 order-1 lg:order-2">
                 <div>
-                  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">RootsDAO Token</h2>
+                  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Root5DAO Token</h2>
                   <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                     Our governance token on Solana. Hold it to vote on memes and participate in the DAO.
                   </p>
@@ -319,7 +319,7 @@ export default function Home() {
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Why RootsDAO?</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Why Root5DAO?</h2>
               <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">Community-driven meme tokenization</p>
             </div>
             
@@ -403,9 +403,9 @@ export default function Home() {
             <div className="text-center">
               <div className="flex items-center justify-center gap-3 mb-8">
                 <div className="w-16 h-16 glass-effect-subtle rounded-full flex items-center justify-center p-2">
-                  <img src="/layers/pfp_base.png" alt="RootsDAO Logo" className="w-full h-full object-contain" />
+                  <img src="/layers/pfp_base.png" alt="Root5DAO Logo" className="w-full h-full object-contain" />
                 </div>
-                <span className="text-2xl font-bold text-white">RootsDAO</span>
+                <span className="text-2xl font-bold text-white">Root5DAO</span>
               </div>
               
               <div className="flex flex-wrap justify-center gap-6 mb-8">
@@ -467,7 +467,7 @@ export default function Home() {
               </div>
               
               <div className="border-t border-white/10 pt-6">
-                <p className="text-gray-400 text-sm">© 2025 RootsDAO. All rights reserved.</p>
+                <p className="text-gray-400 text-sm">© 2025 Root5DAO. All rights reserved.</p>
                 <p className="text-gray-500 text-xs mt-2">Built on Solana • Powered by Community</p>
               </div>
             </div>

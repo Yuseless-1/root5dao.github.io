@@ -21,9 +21,9 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2.5 group">
             <div className="glass-effect-subtle rounded-lg p-2 group-hover:bg-white/5 transition-all">
-              <img src="/layers/pfp_base.png" alt="RootsDAO Logo" className="h-8 w-8 sm:h-10 sm:w-10 object-contain group-hover:scale-110 transition-transform" />
+              <img src="/layers/pfp_base.png" alt="Root5DAO Logo" className="h-8 w-8 sm:h-10 sm:w-10 object-contain group-hover:scale-110 transition-transform" />
             </div>
-            <span className="text-lg sm:text-xl font-bold text-white tracking-tight">RootsDAO</span>
+            <span className="text-lg sm:text-xl font-bold text-white tracking-tight">Root5DAO</span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -140,11 +140,11 @@ export default function Header() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="w-14 h-14 glass-effect-strong rounded-xl flex items-center justify-center bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-500/30 shadow-lg p-2">
-                      <img src="/layers/pfp_base.png" alt="RootsDAO Logo" className="w-full h-full object-contain" />
+                      <img src="/layers/pfp_base.png" alt="Root5DAO Logo" className="w-full h-full object-contain" />
                     </div>
                     <div>
                       <span className="text-white font-bold text-base tracking-tight">Menu</span>
-                      <p className="text-xs text-gray-400 mt-0.5">RootsDAO</p>
+                      <p className="text-xs text-gray-400 mt-0.5">Root5DAO</p>
                     </div>
                   </div>
                 </div>
@@ -294,7 +294,7 @@ export default function Header() {
                       <div>
                         <div className="text-xs text-gray-400 font-medium mb-0.5">Token Balance</div>
                         <div className="text-base font-bold text-white">
-                          {!loading ? `${tokenBalance.balance.toFixed(2)} ROOTS` : 'Loading...'}
+                          {!loading ? `${tokenBalance.balance.toFixed(2)} ROOT5` : 'Loading...'}
                         </div>
                       </div>
                     </div>
