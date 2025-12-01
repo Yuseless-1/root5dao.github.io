@@ -418,7 +418,7 @@ export default function Home() {
               
               <div className="flex justify-center gap-6 mb-8">
                 <Link 
-                  href="https://reddit.com/r/root5daocom" 
+                  href="https://www.reddit.com/r/root5dao/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-gray-300 transition-colors group"
@@ -438,7 +438,7 @@ export default function Home() {
                   <Twitter className="h-6 w-6 group-hover:scale-110 transition-transform duration-200" />
                 </Link>
                 <Link 
-                  href="https://tiktok.com/root5daocom" 
+                  href="https://www.tiktok.com/@root5daocom" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-gray-300 transition-colors group"
@@ -463,6 +463,17 @@ export default function Home() {
                   aria-label="Watch us on Twitch"
                 >
                   <Radio className="h-6 w-6 group-hover:scale-110 transition-transform duration-200" />
+                </Link>
+                <Link 
+                  href="https://bitcointalk.org/index.php?topic=5565567.msg66053550#msg66053550" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-gray-300 transition-colors group"
+                  aria-label="Visit us on BitcoinTalk"
+                >
+                  <svg className="h-6 w-6 group-hover:scale-110 transition-transform duration-200" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.243 15.533.362 9.105 1.962 2.67 8.475-1.243 14.9.358c6.43 1.605 10.342 8.118 8.738 14.547M12.814 3.29c-5.283-.746-10.054 2.849-10.8 8.132-.746 5.283 2.849 10.054 8.132 10.8 5.283.746 10.054-2.849 10.8-8.132.746-5.283-2.849-10.054-8.132-10.8m1.95 2.21c.358.05.7.15 1.02.3.32.15.6.35.84.59.24.24.44.52.59.84.15.32.25.66.3 1.02.05.36.05.72 0 1.08-.05.36-.15.7-.3 1.02-.15.32-.35.6-.59.84-.24.24-.52.44-.84.59-.32.15-.66.25-1.02.3-.36.05-.72.05-1.08 0-.36-.05-.7-.15-1.02-.3-.32-.15-.6-.35-.84-.59-.24-.24-.44-.52-.59-.84-.15-.32-.25-.66-.3-1.02-.05-.36-.05-.72 0-1.08.05-.36.15-.7.3-1.02.15-.32.35-.6.59-.84.24-.24.52-.44.84-.59.32-.15.66-.25 1.02-.3.36-.05.72-.05 1.08 0z"/>
+                  </svg>
                 </Link>
               </div>
               
