@@ -393,46 +393,46 @@ export default function PFPGeneratorSection() {
                     <div className="flex items-center gap-2 bg-green-500/10 border border-green-400/30 rounded-lg p-2 mb-3">
                       <Sparkles className="h-4 w-4 text-green-400" />
                       <p className="text-xs text-green-400 font-medium">AI Features Unlocked!</p>
-                    </div>
-                    <p className="text-xs text-gray-400 mb-3">
-                      Experimental AI feature - Generate a new character based on your prompt
-                    </p>
-                    <input
-                      type="text"
-                      value={aiPrompt}
-                      onChange={(e) => setAiPrompt(e.target.value)}
-                      placeholder="e.g., Add sunglasses, change hair color to blue..."
-                      className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 mb-3"
+                </div>
+                <p className="text-xs text-gray-400 mb-3">
+                  Experimental AI feature - Generate a new character based on your prompt
+                </p>
+                <input
+                  type="text"
+                  value={aiPrompt}
+                  onChange={(e) => setAiPrompt(e.target.value)}
+                  placeholder="e.g., Add sunglasses, change hair color to blue..."
+                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 mb-3"
+                  disabled={isEditing}
+                />
+                <div className="flex gap-2">
+                  <button
+                    onClick={handleAICustomization}
+                    disabled={isEditing || !aiPrompt.trim()}
+                    className="flex-1 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-400/50 px-3 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                  >
+                    {isEditing ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Customizing...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="h-4 w-4" />
+                        Apply AI
+                      </>
+                    )}
+                  </button>
+                  {editedImage && (
+                    <button
+                      onClick={resetToOriginal}
                       disabled={isEditing}
-                    />
-                    <div className="flex gap-2">
-                      <button
-                        onClick={handleAICustomization}
-                        disabled={isEditing || !aiPrompt.trim()}
-                        className="flex-1 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-400/50 px-3 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-                      >
-                        {isEditing ? (
-                          <>
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                            Customizing...
-                          </>
-                        ) : (
-                          <>
-                            <Sparkles className="h-4 w-4" />
-                            Apply AI
-                          </>
-                        )}
-                      </button>
-                      {editedImage && (
-                        <button
-                          onClick={resetToOriginal}
-                          disabled={isEditing}
-                          className="px-3 py-2 bg-gray-700/50 hover:bg-gray-700 text-gray-300 rounded-lg text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          Reset
-                        </button>
-                      )}
-                    </div>
+                      className="px-3 py-2 bg-gray-700/50 hover:bg-gray-700 text-gray-300 rounded-lg text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
                   </>
                 )}
               </div>

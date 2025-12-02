@@ -4,7 +4,7 @@ import { WalletMultiButton } from '@/lib/wallet';
 import { useTokenBalance } from '@/hooks/useTokenBalance';
 import { useWallet } from '@solana/wallet-adapter-react';
 import Link from 'next/link';
-import { Vote, Coins, BookOpen, Home, FileText, PlusCircle, CheckSquare, Palette } from 'lucide-react';
+import { Vote, Coins, BookOpen, Home, FileText, PlusCircle, CheckSquare, Palette, ShoppingBag } from 'lucide-react';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 
@@ -78,6 +78,16 @@ export default function Header() {
             >
               <BookOpen className="h-4 w-4" />
               <span>Whitepaper</span>
+            </Link>
+            <Link 
+              href="/merch" 
+              className={`px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm ${
+                pathname === '/merch' 
+                  ? 'glass-effect-strong text-white' 
+                  : 'text-gray-300 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              Merch
             </Link>
           </nav>
 
