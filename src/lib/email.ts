@@ -119,11 +119,13 @@ export async function sendOrderConfirmationEmail(
         // Record email event
         try {
           const supabase = getSupabaseServer();
-          await supabase.from('order_events').insert({
-            order_id: orderId,
-            event_type: 'email_sent',
-            metadata: { email, type: 'confirmation' },
-          });
+          if (supabase) {
+            await (supabase as any).from('order_events').insert({
+              order_id: orderId,
+              event_type: 'email_sent',
+              metadata: { email, type: 'confirmation' },
+            });
+          }
         } catch (eventError) {
           console.error('Error recording email event (non-fatal):', eventError);
         }
@@ -150,11 +152,13 @@ export async function sendOrderConfirmationEmail(
       if (response.ok) {
         try {
           const supabase = getSupabaseServer();
-          await supabase.from('order_events').insert({
-            order_id: orderId,
-            event_type: 'email_sent',
-            metadata: { email, type: 'confirmation' },
-          });
+          if (supabase) {
+            await (supabase as any).from('order_events').insert({
+              order_id: orderId,
+              event_type: 'email_sent',
+              metadata: { email, type: 'confirmation' },
+            });
+          }
         } catch (eventError) {
           console.error('Error recording email event (non-fatal):', eventError);
         }

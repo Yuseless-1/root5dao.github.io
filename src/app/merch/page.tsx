@@ -222,7 +222,7 @@ export default function MerchPage() {
         const transactionData = data.transferTransaction || data.transaction;
         const transactionBuf = Buffer.from(transactionData, 'base64');
         const { Transaction } = await import('@solana/web3.js');
-        const transferTransaction = Transaction.from(transactionBuf) as Transaction;
+        const transferTransaction = Transaction.from(transactionBuf);
         
         // Check if blockhash is still valid, refresh if needed
         const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash('finalized');
@@ -308,7 +308,6 @@ export default function MerchPage() {
         console.error('SendTransactionError details:', {
           message: error.message,
           logs: logs,
-          signature: error.signature,
           fullError: error,
         });
       } else if (error instanceof Error) {

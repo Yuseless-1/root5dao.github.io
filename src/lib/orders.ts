@@ -33,7 +33,10 @@ export async function createOrder(orderData: {
 }): Promise<Order | null> {
   try {
     const supabase = getSupabaseServer();
-    const { data, error } = await supabase
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+    const { data, error } = await (supabase as any)
       .from('orders')
       .insert({
         id: orderData.id,
@@ -83,8 +86,11 @@ export async function updateOrderStatus(
 ): Promise<Order | null> {
   try {
     const supabase = getSupabaseServer();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
     // Get current order to track status change
-    const { data: currentOrder } = await supabase
+    const { data: currentOrder } = await (supabase as any)
       .from('orders')
       .select('status')
       .eq('id', orderId)
@@ -95,7 +101,7 @@ export async function updateOrderStatus(
     if (signatures?.transfer) updateData.transfer_signature = signatures.transfer;
     if (printifyOrderId) updateData.printify_order_id = printifyOrderId;
 
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from('orders')
       .update(updateData)
       .eq('id', orderId)
@@ -124,6 +130,9 @@ export async function updateOrderStatus(
 export async function getOrder(orderId: string): Promise<Order | null> {
   try {
     const supabase = getSupabaseServer();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
     const { data, error } = await supabase
       .from('orders')
       .select('*')
@@ -145,6 +154,9 @@ export async function getOrder(orderId: string): Promise<Order | null> {
 export async function getAllOrders(): Promise<Order[]> {
   try {
     const supabase = getSupabaseServer();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
     const { data, error } = await supabase
       .from('orders')
       .select('*')
@@ -171,7 +183,10 @@ export async function createOrderEvent(
 ): Promise<void> {
   try {
     const supabase = getSupabaseServer();
-    await supabase.from('order_events').insert({
+    if (!supabase) {
+      return; // Silently fail if Supabase not available
+    }
+    await (supabase as any).from('order_events').insert({
       order_id: orderId,
       event_type: eventType,
       old_status: oldStatus,

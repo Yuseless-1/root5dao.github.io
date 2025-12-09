@@ -92,7 +92,7 @@ export default function Header() {
           </nav>
 
           {/* Right Side - Wallet & Balance */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 relative z-50">
             {/* Token Balance */}
             {connected && !loading && tokenBalance.balance > 0 && (
               <div className="hidden sm:flex items-center gap-2 glass-effect-subtle px-3 py-1.5 rounded-lg">
@@ -110,11 +110,27 @@ export default function Header() {
             
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden relative p-2.5 rounded-lg glass-effect-subtle border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all duration-300 group"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setMobileMenuOpen((prev) => !prev);
+              }}
+              className="md:hidden relative p-3 rounded-lg glass-effect-subtle border border-white/10 hover:border-white/20 hover:bg-white/5 active:bg-white/10 transition-all duration-300 group"
+              style={{
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation',
+                cursor: 'pointer',
+                minWidth: '44px',
+                minHeight: '44px',
+                zIndex: 100,
+                position: 'relative',
+                userSelect: 'none'
+              }}
               aria-label="Toggle mobile menu"
+              aria-expanded={mobileMenuOpen}
+              type="button"
             >
-              <div className="relative w-5 h-5">
+              <div className="relative w-5 h-5 pointer-events-none">
                 <span className={`absolute top-0 left-0 w-5 h-0.5 bg-gray-300 group-hover:bg-green-400 transition-all duration-300 ease-out rounded-full ${
                   mobileMenuOpen ? 'rotate-45 translate-y-2' : ''
                 }`}></span>
@@ -132,11 +148,23 @@ export default function Header() {
         {/* Mobile Navigation */}
         <div className={`md:hidden fixed inset-0 top-16 z-[60] transition-all duration-300 ease-out ${
           mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}>
+        }`}
+        style={{
+          WebkitOverflowScrolling: 'touch'
+        }}
+        >
           {/* Backdrop */}
           <div 
             className="absolute inset-0 bg-black/90 backdrop-blur-md"
             onClick={() => setMobileMenuOpen(false)}
+            onTouchStart={(e) => {
+              if (e.target === e.currentTarget) {
+                setMobileMenuOpen(false);
+              }
+            }}
+            style={{
+              WebkitTapHighlightColor: 'transparent'
+            }}
           ></div>
           
           {/* Main Menu Card */}
