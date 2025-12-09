@@ -6,7 +6,7 @@ import { sendOrderConfirmationEmail } from '@/lib/email';
 
 const RPC_URL = process.env.SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com';
 const ROOT5_MINT = 'AZEqLUaeDb3u6FnGVcLakprwgmk6bD3GPGzNXBZ1pump';
-const MERCH_WALLET = process.env.MERCH_WALLET || 'YOUR_MERCH_WALLET_ADDRESS';
+const MERCH_WALLET = process.env.MERCH_WALLET || 'HduyFWJojMpNn6BES6YJTejBs7LLDqfvfrZ353pZCEbu';
 const JUPITER_API = 'https://lite-api.jup.ag/v6'; // Jupiter Lite API (free tier)
 const SOL_MINT = 'So11111111111111111111111111111111111111112'; // Wrapped SOL
 
@@ -37,6 +37,17 @@ export async function POST(request: NextRequest) {
       console.error('MERCH_WALLET not configured');
       return NextResponse.json(
         { success: false, error: 'Merchant wallet not configured. Please set MERCH_WALLET environment variable.' },
+        { status: 500 }
+      );
+    }
+    
+    // Validate merchant wallet address format
+    try {
+      new PublicKey(MERCH_WALLET);
+    } catch (error) {
+      console.error('Invalid merchant wallet address:', MERCH_WALLET);
+      return NextResponse.json(
+        { success: false, error: 'Invalid merchant wallet address format' },
         { status: 500 }
       );
     }
