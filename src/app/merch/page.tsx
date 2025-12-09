@@ -434,14 +434,14 @@ export default function MerchPage() {
 
         {/* Checkout Modal */}
         {checkoutOpen && (
-          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4">
-            <div className="bg-gray-800 rounded-xl max-w-2xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto border border-gray-700 shadow-2xl">
+          <div className="fixed inset-0 bg-black z-50 flex items-start sm:items-center justify-center pt-16 sm:pt-0 sm:p-2 sm:p-4 overflow-y-auto">
+            <div className="bg-gray-800 rounded-t-2xl sm:rounded-xl max-w-2xl w-full max-h-[calc(100vh-4rem)] sm:max-h-[90vh] overflow-y-auto border-0 sm:border border-gray-700 shadow-2xl">
               <div className="p-4 sm:p-6">
                 <div className="flex justify-between items-center mb-4 sm:mb-6">
                   <h2 className="text-xl sm:text-2xl font-bold text-white">Checkout</h2>
                   <button
                     onClick={() => setCheckoutOpen(false)}
-                    className="text-gray-400 hover:text-white text-2xl sm:text-xl w-8 h-8 flex items-center justify-center"
+                    className="text-gray-400 hover:text-white text-3xl sm:text-xl w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center rounded-full hover:bg-gray-700 sm:rounded-none sm:hover:bg-transparent transition-colors flex-shrink-0"
                     aria-label="Close"
                   >
                     ✕
@@ -453,32 +453,32 @@ export default function MerchPage() {
                   {cart.map((item) => (
                     <div
                       key={item.product.id}
-                      className="bg-gray-700/50 rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 border border-gray-600"
+                      className="bg-gray-700 rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 border border-gray-600"
                     >
                       <img
                         src={item.product.image_url || '/images.jpeg'}
                         alt={item.product.name}
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded flex-shrink-0"
+                        className="w-20 h-20 sm:w-20 sm:h-20 object-cover rounded flex-shrink-0 mx-auto sm:mx-0"
                       />
-                      <div className="flex-1 min-w-0 w-full sm:w-auto">
-                        <h4 className="text-white font-semibold text-sm sm:text-base truncate">{item.product.name}</h4>
-                        <p className="text-gray-400 text-xs sm:text-sm">
+                      <div className="flex-1 min-w-0 w-full sm:w-auto text-center sm:text-left">
+                        <h4 className="text-white font-semibold text-base sm:text-base mb-1 sm:mb-0">{item.product.name}</h4>
+                        <p className="text-gray-400 text-sm sm:text-sm mb-2 sm:mb-0">
                           ${item.product.price_usd.toFixed(2)} × {item.quantity}
                         </p>
                       </div>
-                      <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-start">
-                        <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
+                        <div className="flex items-center gap-3 bg-gray-600 rounded-lg px-2 py-1">
                           <button
                             onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                            className="w-8 h-8 sm:w-8 sm:h-8 rounded bg-gray-700 hover:bg-gray-600 text-white text-lg flex items-center justify-center"
+                            className="w-9 h-9 sm:w-8 sm:h-8 rounded bg-gray-700 hover:bg-gray-600 text-white text-lg font-semibold flex items-center justify-center active:scale-95 transition-transform"
                             aria-label="Decrease quantity"
                           >
                             -
                           </button>
-                          <span className="text-white w-8 text-center text-sm sm:text-base">{item.quantity}</span>
+                          <span className="text-white w-10 text-center text-base sm:text-base font-semibold">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                            className="w-8 h-8 sm:w-8 sm:h-8 rounded bg-gray-700 hover:bg-gray-600 text-white text-lg flex items-center justify-center"
+                            className="w-9 h-9 sm:w-8 sm:h-8 rounded bg-gray-700 hover:bg-gray-600 text-white text-lg font-semibold flex items-center justify-center active:scale-95 transition-transform"
                             aria-label="Increase quantity"
                           >
                             +
@@ -486,7 +486,7 @@ export default function MerchPage() {
                         </div>
                         <button
                           onClick={() => removeFromCart(item.product.id)}
-                          className="text-red-400 hover:text-red-300 text-sm sm:text-base px-2 sm:px-0"
+                          className="text-red-400 hover:text-red-300 text-sm sm:text-base px-3 py-2 rounded-lg hover:bg-red-400/10 transition-colors"
                         >
                           Remove
                         </button>
@@ -496,15 +496,15 @@ export default function MerchPage() {
                 </div>
 
                 {/* Total */}
-                <div className="bg-gray-700/50 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 border border-gray-600">
+                <div className="bg-gray-700 rounded-lg p-4 sm:p-4 mb-4 sm:mb-6 border border-gray-600">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-300 text-base sm:text-lg">Total:</span>
+                    <span className="text-gray-300 text-lg sm:text-lg font-semibold">Total:</span>
                     <div className="text-right">
-                      <p className="text-xl sm:text-2xl font-bold text-white">
+                      <p className="text-2xl sm:text-2xl font-bold text-white">
                         ${getTotalUSD().toFixed(2)}
                       </p>
                       {solPrice > 0 && (
-                        <p className="text-xs sm:text-sm text-gray-400">
+                        <p className="text-sm sm:text-sm text-gray-400 mt-1">
                           {getTotalSOL().toFixed(4)} SOL
                         </p>
                       )}
@@ -513,9 +513,9 @@ export default function MerchPage() {
                 </div>
 
                 {/* Shipping Form */}
-                <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
-                  <h3 className="text-lg sm:text-xl font-bold text-white">Shipping Information</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="space-y-4 sm:space-y-4 mb-4 sm:mb-6">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-0">Shipping Information</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-4">
                     <input
                       type="text"
                       placeholder="First Name *"
@@ -523,7 +523,7 @@ export default function MerchPage() {
                       onChange={(e) =>
                         setShippingInfo({ ...shippingInfo, firstName: e.target.value })
                       }
-                      className="bg-gray-700 rounded-lg p-3 text-sm sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none"
+                      className="bg-gray-700 rounded-lg p-3.5 sm:p-3 text-base sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none focus:ring-2 focus:ring-green-400/20"
                       required
                     />
                     <input
@@ -533,7 +533,7 @@ export default function MerchPage() {
                       onChange={(e) =>
                         setShippingInfo({ ...shippingInfo, lastName: e.target.value })
                       }
-                      className="bg-gray-700 rounded-lg p-3 text-sm sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none"
+                      className="bg-gray-700 rounded-lg p-3.5 sm:p-3 text-base sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none focus:ring-2 focus:ring-green-400/20"
                       required
                     />
                   </div>
@@ -544,7 +544,7 @@ export default function MerchPage() {
                     onChange={(e) =>
                       setShippingInfo({ ...shippingInfo, email: e.target.value })
                     }
-                    className="bg-gray-700 rounded-lg p-3 text-sm sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none w-full"
+                    className="bg-gray-700 rounded-lg p-3.5 sm:p-3 text-base sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none focus:ring-2 focus:ring-green-400/20 w-full"
                     required
                   />
                   <input
@@ -554,10 +554,10 @@ export default function MerchPage() {
                     onChange={(e) =>
                       setShippingInfo({ ...shippingInfo, address1: e.target.value })
                     }
-                    className="bg-gray-700 rounded-lg p-3 text-sm sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none w-full"
+                    className="bg-gray-700 rounded-lg p-3.5 sm:p-3 text-base sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none focus:ring-2 focus:ring-green-400/20 w-full"
                     required
                   />
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4">
                     <input
                       type="text"
                       placeholder="City *"
@@ -565,7 +565,7 @@ export default function MerchPage() {
                       onChange={(e) =>
                         setShippingInfo({ ...shippingInfo, city: e.target.value })
                       }
-                      className="bg-gray-700 rounded-lg p-3 text-sm sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none"
+                      className="bg-gray-700 rounded-lg p-3.5 sm:p-3 text-base sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none focus:ring-2 focus:ring-green-400/20"
                       required
                     />
                     <input
@@ -575,7 +575,7 @@ export default function MerchPage() {
                       onChange={(e) =>
                         setShippingInfo({ ...shippingInfo, region: e.target.value })
                       }
-                      className="bg-gray-700 rounded-lg p-3 text-sm sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none"
+                      className="bg-gray-700 rounded-lg p-3.5 sm:p-3 text-base sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none focus:ring-2 focus:ring-green-400/20"
                       required
                     />
                     <input
@@ -585,38 +585,40 @@ export default function MerchPage() {
                       onChange={(e) =>
                         setShippingInfo({ ...shippingInfo, zip: e.target.value })
                       }
-                      className="bg-gray-700 rounded-lg p-3 text-sm sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none"
+                      className="bg-gray-700 rounded-lg p-3.5 sm:p-3 text-base sm:text-base text-white placeholder-gray-400 border border-gray-600 focus:border-green-400 focus:outline-none focus:ring-2 focus:ring-green-400/20"
                       required
                     />
                   </div>
                 </div>
 
                 {/* Payment */}
-                <div className="bg-gray-700/50 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 border border-gray-600">
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Payment</h3>
+                <div className="bg-gray-700 rounded-lg p-4 sm:p-4 mb-4 sm:mb-6 border border-gray-600">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-4">Payment</h3>
                   {!connected ? (
                     <div className="text-center">
-                      <p className="text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">Connect your wallet to pay</p>
-                      <WalletMultiButton />
+                      <p className="text-gray-400 mb-4 sm:mb-4 text-base sm:text-base">Connect your wallet to pay</p>
+                      <div className="flex justify-center">
+                        <WalletMultiButton />
+                      </div>
                     </div>
                   ) : (
                     <div>
-                      <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
+                      <p className="text-gray-300 mb-4 sm:mb-4 text-base sm:text-base text-center sm:text-left">
                         Pay with SOL - will be automatically converted to ROOT5 tokens
                       </p>
                       <button
                         onClick={handleCheckout}
                         disabled={processing}
-                        className="w-full btn-primary disabled:opacity-50 text-sm sm:text-base py-2.5 sm:py-3"
+                        className="w-full btn-primary disabled:opacity-50 text-base sm:text-base py-4 sm:py-3 font-semibold rounded-lg transition-all active:scale-95"
                       >
                         {processing ? (
-                          <>
-                            <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin inline mr-2" />
+                          <span className="flex items-center justify-center">
+                            <Loader2 className="h-5 w-5 sm:h-5 sm:w-5 animate-spin inline mr-2" />
                             {paymentStep === 'signing' && 'Please sign transactions...'}
                             {paymentStep === 'sending' && 'Sending transactions...'}
                             {paymentStep === 'confirming' && 'Confirming transactions...'}
                             {paymentStep === 'idle' && 'Processing...'}
-                          </>
+                          </span>
                         ) : (
                           'Complete Purchase'
                         )}
