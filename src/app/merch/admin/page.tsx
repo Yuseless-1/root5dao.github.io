@@ -5,6 +5,9 @@ import Header from '@/components/Header';
 import { Package, DollarSign, ShoppingCart, Loader2, CheckCircle, Clock, XCircle, LogOut, Lock } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
+// Prevent static generation for this admin page
+export const dynamic = 'force-dynamic';
+
 interface Order {
   id: string;
   wallet: string;
