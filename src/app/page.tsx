@@ -10,6 +10,7 @@ import { useTokenHolders } from '@/hooks/useTokenHolders';
 import { useProposalCount } from '@/hooks/useProposalCount';
 import { useTokenPrice } from '@/hooks/useTokenPrice';
 import PFPGeneratorSection from '@/components/PFPGeneratorSection';
+import BuyRoot5 from '@/components/BuyRoot5';
 
 export default function Home() {
   const { connected } = useWallet();
@@ -201,7 +202,7 @@ export default function Home() {
         {/* Token Info Section */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 items-start">
               <div className="text-center lg:text-left order-2 lg:order-1">
                 <div className="glass-effect rounded-xl p-6 sm:p-8 card-hover">
                   <div className="grid grid-cols-3 gap-3 sm:gap-4">
@@ -236,7 +237,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="space-y-6 order-1 lg:order-2">
+              <div className="space-y-6 order-1 lg:order-2 lg:col-span-1">
                 <div>
                   <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Root5DAO Token</h2>
                   <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
@@ -310,6 +311,11 @@ export default function Home() {
                     DexScreener
                   </a>
                 </div>
+              </div>
+              
+              {/* Buy ROOT5 Component */}
+              <div className="order-3 lg:col-span-1 lg:sticky lg:top-24">
+                <BuyRoot5 />
               </div>
             </div>
           </div>

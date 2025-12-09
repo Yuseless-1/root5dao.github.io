@@ -445,10 +445,10 @@ export default function MerchAdminPage() {
                       {selectedOrder.items.map((item, index) => {
                         const productName = getProductName(item.productId);
                         return (
-                          <div
-                            key={index}
+                        <div
+                          key={index}
                             className="glass-effect-subtle rounded-lg p-4 flex justify-between items-center"
-                          >
+                        >
                             <div className="flex-1">
                               <p className="text-white font-semibold">{productName}</p>
                               <p className="text-gray-400 text-sm">Product ID: {item.productId}</p>
