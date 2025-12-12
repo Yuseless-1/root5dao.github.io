@@ -2,7 +2,7 @@
 
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@/lib/wallet';
-import { Vote, Users, Coins, Shield, Upload, Bolt, ChartLine, Github, Twitter, Video, Instagram, Radio } from 'lucide-react';
+import { Vote, Users, Coins, Shield, Upload, Bolt, ChartLine, Github, Twitter, Video, Instagram, Radio, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import { useTelegramMembers } from '@/hooks/useTelegramMembers';
@@ -420,6 +420,18 @@ export default function Home() {
                 <Link href="#" className="text-gray-300 hover:text-gray-300 transition-colors font-medium">Tokenomics</Link>
                 <Link href="#" className="text-gray-300 hover:text-gray-300 transition-colors font-medium">Docs</Link>
                 <Link href="#" className="text-gray-300 hover:text-gray-300 transition-colors font-medium">Contact</Link>
+              </div>
+              
+              <div className="flex justify-center mb-8">
+                <a
+                  href="https://merch.root5dao.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-base px-6 py-3 inline-flex items-center gap-2"
+                >
+                  <ShoppingBag className="h-5 w-5" />
+                  Shop Merch
+                </a>
               </div>
               
               <div className="flex justify-center gap-6 mb-8">

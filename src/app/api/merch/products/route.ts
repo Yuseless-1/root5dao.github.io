@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 
 // Printify API configuration
 const PRINTIFY_API_BASE = 'https://api.printify.com/v1';
-const PRINTIFY_API_TOKEN = process.env.PRINTIFY_API_TOKEN;
-const PRINTIFY_SHOP_ID = process.env.PRINTIFY_SHOP_ID || '1';
+const PRINTIFY_API_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzN2Q0YmQzMDM1ZmUxMWU5YTgwM2FiN2VlYjNjY2M5NyIsImp0aSI6Ijk2YmQzZTRkZDk5OWRjNDkyYmI0MWZkZWI3YWU3M2IyYmQ5NmI4N2NlOGQ1MDQ2ZDg1NmZhZDBiMjg3YmExNGUxMzQyZjVkZGY5NjQ0NzU5IiwiaWF0IjoxNzY0NzE1MTgyLjUxODA3MywibmJmIjoxNzY0NzE1MTgyLjUxODA3NSwiZXhwIjoxNzk2MjUxMTgyLjUxMzcyNCwic3ViIjoiMjUyODMxMzUiLCJzY29wZXMiOlsic2hvcHMubWFuYWdlIiwic2hvcHMucmVhZCIsImNhdGFsb2cucmVhZCIsIm9yZGVycy5yZWFkIiwib3JkZXJzLndyaXRlIiwicHJvZHVjdHMucmVhZCIsInByb2R1Y3RzLndyaXRlIiwid2ViaG9va3MucmVhZCIsIndlYmhvb2tzLndyaXRlIiwidXBsb2Fkcy5yZWFkIiwidXBsb2Fkcy53cml0ZSIsInByaW50X3Byb3ZpZGVycy5yZWFkIiwidXNlci5pbmZvIl19.uoW1RzQOOkT5Ugm0gEha-7B3BUnLpOy021ZCggE6xTAdsxLwfSFfLHCmYeNRQl5v50E35WJ849Znt3mjoDJ9XRGOWrLRGjUuP3Hb1B2qmeovQP9yD4NRVMf6rezuVUNdMgVnKHLE-6snCmapyZNOKLJM5s3KlDLTWfwK2sqiYY4D_JeZDMkxBMaEONG4xM7mrAy7j3lJwjdVTQuI1tWVGkhSuCwvjrorCDe2mMJQpnaxyWvf_0JCnQgbHffcxcRmN04TM9uEkwjxmzvo2TbbSKy78l4VecGjRs2QRQs7iWMFHQtk5M64cYh2Pm5swhjr6hWxWGg-dxtsEHr35lz31r4NgeHBSdtuHu31k1NQaJ7YEGdaiUFTvYrlha9Iz5QKS8FgqJt27UwzT_StLbS_kzFlulkPykfY6WpmZOfnIyv6EpviAVY4mvEzQ4iHZ1jIE2UccJERr5WTIC4AKOrJbXbTK3hKeEvcMz3QeqmXyiJ5BsDNjk34erqY6uSvllpQsxH55SMBOcWAz1-5Spk11mHqauqU7niS7GHnW-DAcG_kynx0ixFXEbzeg8bzgFkjCCpJG54CJFdweW5-CF9mOmVaNRFLYlFob9BeC58YUcr0hO2YdV_XrItWzednuIOrpS5PO_KwkSY8OKgUbt1KrZ37fn9-bMpvjJHOrRGtfW4';
+const PRINTIFY_SHOP_ID = '1';
 
 interface PrintifyProduct {
   id: string | number;
@@ -186,47 +186,50 @@ function mapPrintifyProduct(printifyProduct: PrintifyProduct): MappedProduct {
 
 export async function GET() {
   try {
-    // If no API token is configured, return fallback products
-    if (!PRINTIFY_API_TOKEN) {
-      console.warn('PRINTIFY_API_TOKEN not configured, using fallback products');
-      console.warn('Environment check - PRINTIFY_API_TOKEN exists:', !!process.env.PRINTIFY_API_TOKEN);
-      return NextResponse.json({
-        success: true,
-        products: FALLBACK_PRODUCTS,
-        source: 'fallback',
-        debug: 'PRINTIFY_API_TOKEN not found in environment',
-      });
-    }
+    // Use hardcoded API token and shop ID
+    const apiToken = PRINTIFY_API_TOKEN;
+    const shopId = PRINTIFY_SHOP_ID;
 
     console.log('Fetching products from Printify API...');
-    console.log(`Shop ID: ${PRINTIFY_SHOP_ID}`);
+    console.log(`Shop ID: ${shopId}`);
     console.log(`API Base: ${PRINTIFY_API_BASE}`);
-    console.log(`API Token exists: ${!!PRINTIFY_API_TOKEN} (length: ${PRINTIFY_API_TOKEN.length})`);
+    console.log(`API Token exists: ${!!apiToken} (length: ${apiToken.length})`);
 
     // First, try to get shops to verify the shop ID
-    let shopId = PRINTIFY_SHOP_ID;
+    let finalShopId = shopId;
     
     // Try to get shops list to find the correct shop ID
     try {
-      const shopsResponse = await fetch(
-        `${PRINTIFY_API_BASE}/shops.json`,
-        {
-          headers: {
-            'Authorization': `Bearer ${PRINTIFY_API_TOKEN}`,
-            'Content-Type': 'application/json',
-            'User-Agent': 'Root5DAO-Merch-Store/1.0',
-          },
-        }
-      );
+      const shopsController = new AbortController();
+      const shopsTimeout = setTimeout(() => shopsController.abort(), 15000); // 15 second timeout
+      
+      try {
+        const shopsResponse = await fetch(
+          `${PRINTIFY_API_BASE}/shops.json`,
+          {
+            headers: {
+              'Authorization': `Bearer ${apiToken}`,
+              'Content-Type': 'application/json',
+              'User-Agent': 'Root5DAO-Merch-Store/1.0',
+            },
+            signal: shopsController.signal,
+          }
+        );
+        
+        clearTimeout(shopsTimeout);
 
-      if (shopsResponse.ok) {
-        const shopsData = await shopsResponse.json();
-        if (shopsData && Array.isArray(shopsData) && shopsData.length > 0) {
-          // Use the first shop if shop ID is not found
-          const foundShop = shopsData.find((s: any) => String(s.id) === String(shopId)) || shopsData[0];
-          shopId = String(foundShop.id);
-          console.log(`Using shop ID: ${shopId}`);
+        if (shopsResponse.ok) {
+          const shopsData = await shopsResponse.json();
+          if (shopsData && Array.isArray(shopsData) && shopsData.length > 0) {
+            // Use the first shop if shop ID is not found
+            const foundShop = shopsData.find((s: any) => String(s.id) === String(finalShopId)) || shopsData[0];
+            finalShopId = String(foundShop.id);
+            console.log(`Using shop ID: ${finalShopId}`);
+          }
         }
+      } catch (fetchError) {
+        clearTimeout(shopsTimeout);
+        throw fetchError;
       }
     } catch (shopError) {
       console.warn('Could not fetch shops list, using provided shop ID:', shopError);
@@ -234,17 +237,37 @@ export async function GET() {
 
     // Fetch products from Printify API
     // According to Printify API docs, we need to include User-Agent header
-    const response = await fetch(
-      `${PRINTIFY_API_BASE}/shops/${shopId}/products.json?limit=50`,
-      {
-        headers: {
-          'Authorization': `Bearer ${PRINTIFY_API_TOKEN}`,
-          'Content-Type': 'application/json',
-          'User-Agent': 'Root5DAO-Merch-Store/1.0',
-        },
-        next: { revalidate: 300 }, // Cache for 5 minutes
+    const productsController = new AbortController();
+    const productsTimeout = setTimeout(() => productsController.abort(), 20000); // 20 second timeout
+    
+    let response;
+    try {
+      response = await fetch(
+        `${PRINTIFY_API_BASE}/shops/${finalShopId}/products.json?limit=50`,
+        {
+          headers: {
+            'Authorization': `Bearer ${apiToken}`,
+            'Content-Type': 'application/json',
+            'User-Agent': 'Root5DAO-Merch-Store/1.0',
+          },
+          signal: productsController.signal,
+          next: { revalidate: 300 }, // Cache for 5 minutes
+        }
+      );
+      clearTimeout(productsTimeout);
+    } catch (fetchError: any) {
+      clearTimeout(productsTimeout);
+      if (fetchError.name === 'AbortError' || fetchError.code === 'UND_ERR_CONNECT_TIMEOUT') {
+        console.error('Printify API connection timeout - using fallback products');
+        return NextResponse.json({
+          success: true,
+          products: FALLBACK_PRODUCTS,
+          source: 'fallback_timeout',
+          error: 'Connection timeout - Printify API took too long to respond',
+        });
       }
-    );
+      throw fetchError;
+    }
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -320,9 +343,14 @@ export async function GET() {
 
     console.log(`Mapped ${mappedProducts.length} products`);
 
-    // If no products found, return fallback
+    // If no products found, return fallback - NEVER return empty array
     if (mappedProducts.length === 0) {
       console.warn('No products found after mapping, using fallback');
+      console.warn('Debug info:', {
+        rawProductsCount: printifyProducts.length,
+        mappedProductsCount: mappedProducts.length,
+        shopId: finalShopId,
+      });
       return NextResponse.json({
         success: true,
         products: FALLBACK_PRODUCTS,
@@ -330,6 +358,11 @@ export async function GET() {
         debug: {
           rawProductsCount: printifyProducts.length,
           mappedProductsCount: mappedProducts.length,
+        },
+      }, {
+        status: 200,
+        headers: {
+          'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=120',
         },
       });
     }
@@ -347,13 +380,19 @@ export async function GET() {
     console.error('Error fetching products from Printify:', error);
     const errorMessage = error instanceof Error ? error.message : String(error);
     console.error('Error details:', errorMessage);
+    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
     
-    // Return fallback products on error
+    // ALWAYS return fallback products on error - never return empty
     return NextResponse.json({
       success: true,
       products: FALLBACK_PRODUCTS,
       source: 'fallback_error',
       error: errorMessage,
+    }, {
+      status: 200, // Always return 200 OK even on error, so frontend can display fallback products
+      headers: {
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=120', // Short cache for fallback
+      },
     });
   }
 }

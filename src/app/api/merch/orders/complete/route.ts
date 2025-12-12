@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { updateOrderStatus, getOrder } from '@/lib/orders';
 import { triggerWebhooks } from '@/lib/webhooks';
-import { sendOrderConfirmationEmail } from '@/lib/email';
+import { sendAdminOrderNotification } from '@/lib/email';
 import { createPrintifyOrder, mapCartToPrintifyLineItems } from '@/lib/printify-orders';
 
 export async function POST(request: NextRequest) {
@@ -115,18 +115,52 @@ export async function POST(request: NextRequest) {
       updatedOrder = order; // Use original order if update fails
     }
 
-    // Send confirmation email
+    // CRITICAL: Send admin notification email with delivery details
+    // This MUST be sent after payment is confirmed so admins can contact client
+    let emailSent = false;
     try {
-      await sendOrderConfirmationEmail(orderId, order.shipping.email, {
+      // Fetch products to get product names for the email
+      let productsMap: Record<string, { name: string }> = {};
+      try {
+        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 
+                       (request.headers.get('origin') || 'http://localhost:3000');
+        const productsResponse = await fetch(`${baseUrl}/api/merch/products`);
+        if (productsResponse.ok) {
+          const productsData = await productsResponse.json();
+          if (productsData.success && productsData.products) {
+            productsData.products.forEach((product: any) => {
+              productsMap[product.id] = { name: product.name };
+            });
+          }
+        }
+      } catch (error) {
+        console.warn('Could not fetch products for email, using available data');
+      }
+
+      const itemsWithNames = (order.items || []).map((item: any) => ({
+        productId: item.productId,
+        productName: productsMap[item.productId]?.name || item.productName || `Product ${item.productId}`,
+        quantity: item.quantity,
+        price: item.price || 0,
+      }));
+
+      emailSent = await sendAdminOrderNotification(orderId, {
+        wallet: order.wallet,
         totalUSD: order.total_usd,
         totalSOL: order.total_sol,
         root5Amount: order.root5_amount,
-        items: order.items,
+        items: itemsWithNames,
         shipping: order.shipping,
       });
+
+      if (emailSent) {
+        console.log(`✅ Admin notification email sent successfully for order ${orderId} to admins@root5dao.com`);
+      } else {
+        console.error(`❌ Failed to send admin notification email for order ${orderId}. Email service may not be configured.`);
+      }
     } catch (emailError) {
-      console.error('Error sending email:', emailError);
-      // Don't fail if email fails
+      console.error('❌ Error sending admin email:', emailError);
+      // Log but don't fail the order completion since payment was successful
     }
 
     // Trigger webhook for order completed
@@ -144,6 +178,7 @@ export async function POST(request: NextRequest) {
       success: true,
       order: updatedOrder,
       printifyOrderId,
+      emailSent, // Include email status in response
     });
   } catch (error) {
     console.error('Error completing order:', error);
