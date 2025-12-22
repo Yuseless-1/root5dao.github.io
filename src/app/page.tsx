@@ -11,6 +11,7 @@ import { useProposalCount } from '@/hooks/useProposalCount';
 import { useTokenPrice } from '@/hooks/useTokenPrice';
 import PFPGeneratorSection from '@/components/PFPGeneratorSection';
 import BuyRoot5 from '@/components/BuyRoot5';
+import { StructuredData } from '@/components/StructuredData';
 
 export default function Home() {
   const { connected } = useWallet();
@@ -26,8 +27,29 @@ export default function Home() {
     });
   };
 
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Root5DAO',
+    description: 'Community-driven meme tokenization on Solana. Submit, vote, and trade the memes that matter.',
+    url: 'https://root5dao.github.io',
+    logo: 'https://root5dao.github.io/layers/pfp_base.png',
+    sameAs: [
+      'https://x.com/i/communities/1986508224624009710',
+      'https://www.reddit.com/r/root5dao/',
+      'https://www.tiktok.com/@root5daocom',
+      'http://instagram.com/root5daocom',
+      'https://www.twitch.tv/root5dao',
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'Community Support',
+    },
+  };
+
   return (
     <>
+      <StructuredData data={structuredData} />
       <Header />
       <div className="min-h-screen relative">
         {/* Background SVG */}
