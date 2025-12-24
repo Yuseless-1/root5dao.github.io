@@ -4,7 +4,7 @@ import { WalletMultiButton } from '@/lib/wallet';
 import { useTokenBalance } from '@/hooks/useTokenBalance';
 import { useWallet } from '@solana/wallet-adapter-react';
 import Link from 'next/link';
-import { Vote, Coins, BookOpen, Home, FileText, PlusCircle, CheckSquare, Palette, ShoppingBag } from 'lucide-react';
+import { Vote, Coins, BookOpen, Home, FileText, PlusCircle, CheckSquare, Palette, ShoppingBag, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 
@@ -79,6 +79,16 @@ export default function Header() {
               <BookOpen className="h-4 w-4" />
               <span>Whitepaper</span>
             </Link>
+            <a 
+              href="/chat.html" 
+              className={`px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm ${
+                pathname === '/chat.html' 
+                  ? 'glass-effect-strong text-white' 
+                  : 'text-gray-300 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              Chat
+            </a>
             <a 
               href="https://merch.root5dao.com/" 
               target="_blank"
@@ -317,6 +327,32 @@ export default function Header() {
                     <div className="w-2 h-2 rounded-full bg-green-400"></div>
                   )}
                 </Link>
+                
+                <a 
+                  href="/chat.html" 
+                  className={`group flex items-center justify-between px-5 py-3.5 rounded-xl text-white transition-all duration-200 font-medium text-sm ${
+                    pathname === '/chat.html'
+                      ? 'glass-effect-strong bg-white/10 border border-white/20'
+                      : 'glass-effect-subtle hover:bg-white/5 hover:border-white/10 border border-transparent'
+                  }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <div className="flex items-center">
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center mr-3 transition-all ${
+                      pathname === '/chat.html'
+                        ? 'bg-green-500/20 border border-green-500/30'
+                        : 'bg-white/5 border border-white/10 group-hover:bg-green-500/10 group-hover:border-green-500/20'
+                    }`}>
+                      <MessageSquare className={`h-5 w-5 transition-colors ${
+                        pathname === '/chat.html' ? 'text-green-400' : 'text-gray-400 group-hover:text-green-400'
+                      }`} />
+                    </div>
+                    <span className="font-semibold">Chat</span>
+                  </div>
+                  {pathname === '/chat.html' && (
+                    <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                  )}
+                </a>
                 
                 <a 
                   href="https://merch.root5dao.com/" 

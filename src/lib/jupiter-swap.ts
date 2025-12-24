@@ -13,6 +13,8 @@ export interface SwapQuote {
   inAmount: string;
   outAmount: string;
   priceImpactPct: number;
+  // Store the full quote response for swap transaction
+  fullQuoteResponse: any;
 }
 
 export async function getSwapQuote(
@@ -30,6 +32,13 @@ export async function getSwapQuote(
       `slippageBps=${slippageBps}`;
 
     const response = await fetch(url);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Jupiter quote HTTP error:', response.status, errorText);
+      return null;
+    }
+
     const data = await response.json();
 
     if (data.error) {
@@ -37,12 +46,19 @@ export async function getSwapQuote(
       return null;
     }
 
+    if (!data.inAmount || !data.outAmount) {
+      console.error('Invalid quote response:', data);
+      return null;
+    }
+
+    // Return both the simplified quote and the full response
     return {
       inputMint: data.inputMint,
       outputMint: data.outputMint,
       inAmount: data.inAmount,
       outAmount: data.outAmount,
       priceImpactPct: data.priceImpactPct || 0,
+      fullQuoteResponse: data, // Store the full response for swap
     };
   } catch (error) {
     console.error('Error fetching swap quote:', error);
@@ -55,24 +71,43 @@ export async function getSwapTransaction(
   quote: SwapQuote
 ): Promise<string | null> {
   try {
+    if (!quote.fullQuoteResponse) {
+      console.error('Missing full quote response');
+      return null;
+    }
+
+    // Use the full quote response for the swap endpoint
+    const swapPayload = {
+      quoteResponse: quote.fullQuoteResponse, // Pass the full quote response
+      userPublicKey,
+      wrapAndUnwrapSol: true,
+      dynamicComputeUnitLimit: true,
+      prioritizationFeeLamports: 'auto',
+    };
+
     const response = await fetch(`${JUPITER_API}/swap`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        quoteResponse: quote,
-        userPublicKey,
-        wrapAndUnwrapSol: true,
-        dynamicComputeUnitLimit: true,
-        prioritizationFeeLamports: 'auto',
-      }),
+      body: JSON.stringify(swapPayload),
     });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Jupiter swap HTTP error:', response.status, errorText);
+      return null;
+    }
 
     const data = await response.json();
     
     if (data.error) {
       console.error('Jupiter swap error:', data.error);
+      return null;
+    }
+
+    if (!data.swapTransaction) {
+      console.error('No swapTransaction in response:', data);
       return null;
     }
 

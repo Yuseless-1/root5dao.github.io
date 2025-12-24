@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat - Root5DAO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #f8f8f8;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+        }
+
+        /* Header Section */
+        .header-section {
+            grid-column: 1 / -1;
+            margin-bottom: 2rem;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 0.75rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #00ff88;
+            margin-bottom: 1rem;
+        }
+
+        .header-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #00ff88;
+            border-radius: 50%;
+        }
+
+        .header-section h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .header-section p {
+            font-size: 1rem;
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+
+        .header-tags {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 0.5rem 0.875rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            color: #e5e7eb;
+        }
+
+        .tag strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Glass Effect Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .card-tag {
+            padding: 0.25rem 0.625rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .card-content {
+            color: #d1d5db;
+            font-size: 0.9375rem;
+        }
+
+        .card-content strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Prompt Examples */
+        .prompt-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prompt-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .prompt-item:last-child {
+            border-bottom: none;
+        }
+
+        .prompt-item:hover {
+            color: #00ff88;
+            padding-left: 0.5rem;
+        }
+
+        .prompt-item strong {
+            color: #00ff88;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Chat Container */
+        .chat-wrapper {
+            position: sticky;
+            top: 2rem;
+        }
+
+        .chat-container {
+            width: 100%;
+            height: 700px;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Status Boxes (like bounty page) */
+        .status-boxes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-box {
+            padding: 1rem;
+            background: rgba(0, 255, 136, 0.05);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .status-box-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+
+        .status-box-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Expandable sections */
+        .expandable {
+            margin-top: 1rem;
+        }
+
+        .expand-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #00ff88;
+            font-size: 0.875rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            margin-top: 0.5rem;
+        }
+
+        .expand-btn:hover {
+            color: #4ade80;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-wrapper {
+                position: relative;
+                top: 0;
+            }
+
+            .status-boxes {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-section h1 {
+                font-size: 2rem;
+            }
+
+            .chat-container {
+                height: 500px;
+            }
+
+            .card {
+                padding: 1.25rem;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header-section">
+            <div class="header-badge">AI Chat Assistant</div>
+            <h1>ROOT5 DAO AI Chat</h1>
+            <p>Powered by Llama 2 7B. Ask questions about Root5DAO, tokenization, voting, and more.</p>
+            <div class="header-tags">
+                <div class="tag"><strong>Llama 2</strong> 7B Model</div>
+                <div class="tag">Interactive Chat</div>
+                <div class="tag">Free to Use</div>
+            </div>
+        </div>
+
+        <!-- Left Column - Prompt Examples -->
+        <div>
+            <!-- Example Prompts Section -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Example Prompts</div>
+                    <div class="card-tag">Click to Copy</div>
+                </div>
+                <div class="card-content">
+                    <ul class="prompt-list">
+                        <li class="prompt-item" onclick="setPrompt('What is Root5DAO and how does it work?')">
+                            <strong>About Root5DAO</strong>
+                            What is Root5DAO and how does it work?
+                        </li>
+                        <li class="prompt-item" onclick="setPrompt('Explain how meme tokenization works on Solana')">
+                            <strong>Tokenization</strong>
+                            Explain how meme tokenization works on Solana
+                        </li>
+                        <li class="prompt-item" onclick="setPrompt('How do I participate in the voting system?')">
+                            <strong>Voting System</strong>
+                            How do I participate in the voting system?
+                        </li>
+                        <li class="prompt-item" onclick="setPrompt('What are the benefits of holding ROOT5 tokens?')">
+                            <strong>Token Benefits</strong>
+                            What are the benefits of holding ROOT5 tokens?
+                        </li>
+                        <li class="prompt-item" onclick="setPrompt('How does the bounty program work?')">
+                            <strong>Bounty Program</strong>
+                            How does the bounty program work?
+                        </li>
+                        <li class="prompt-item" onclick="setPrompt('What is the difference between Tier 1, 2, and 3 in the bounty?')">
+                            <strong>Bounty Tiers</strong>
+                            What is the difference between Tier 1, 2, and 3 in the bounty?
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- How to Use Section -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">How to Use</div>
+                    <div class="card-tag">Instructions</div>
+                </div>
+                <div class="card-content">
+                    <p style="margin-bottom: 0.75rem;">
+                        <strong>Step 1:</strong> Click on any example prompt above to copy it to your clipboard.
+                    </p>
+                    <p style="margin-bottom: 0.75rem;">
+                        <strong>Step 2:</strong> Paste the prompt into the chat interface on the right.
+                    </p>
+                    <p>
+                        <strong>Step 3:</strong> The AI will respond with helpful information about Root5DAO.
+                    </p>
+                </div>
+            </div>
+
+            <!-- About the Model Section -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">About the Model</div>
+                    <div class="card-tag">Llama 2</div>
+                </div>
+                <div class="card-content">
+                    <p style="margin-bottom: 0.75rem;">
+                        <strong>Model:</strong> Llama 2 7B Chat
+                    </p>
+                    <p style="margin-bottom: 0.75rem;">
+                        <strong>Provider:</strong> Hugging Face Spaces
+                    </p>
+                    <p>
+                        <strong>Capabilities:</strong> General conversation, Q&A, explanations, and more.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Chat Interface -->
+        <div class="chat-wrapper">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Chat with AI</div>
+                    <div class="card-tag">Live</div>
+                </div>
+                <div class="chat-container">
+                    <iframe 
+                        src="https://huggingface.co/spaces/huggingface-projects/llama-2-7b-chat?embed=true"
+                        title="AI Chat Interface"
+                        allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; clipboard-read; clipboard-write; cross-origin-isolated; display-capture; document-domain; encrypted-media; execution-while-not-rendered; execution-while-out-of-viewport; fullscreen; geolocation; gyroscope; hid; identity-credentials-get; idle-detection; interest-cohort; keyboard-map; keyboard-control; magnetometer; microphone; midi; navigation-override; otp-credentials; payment; picture-in-picture; publickey-credentials-get; screen-wake-lock; serial; sync-xhr; usb; web-share; xr-spatial-tracking"
+                        sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads allow-storage-access-by-user-activation"
+                        loading="lazy"
+                    ></iframe>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.875rem; color: #9ca3af; text-align: center;">
+                    Click example prompts on the left to get started
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setPrompt(promptText) {
+            navigator.clipboard.writeText(promptText).then(() => {
+                const notification = document.createElement('div');
+                notification.textContent = '✓ Prompt copied! Paste it in the chat.';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(0, 255, 136, 0.95);
+                    color: #000;
+                    padding: 0.75rem 1.25rem;
+                    border-radius: 0.5rem;
+                    font-weight: 600;
+                    font-size: 0.875rem;
+                    z-index: 1000;
+                    box-shadow: 0 4px 16px rgba(0, 255, 136, 0.3);
+                    animation: slideIn 0.3s ease;
+                `;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Click on the chat interface and type: ' + promptText);
+            });
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
