@@ -2,7 +2,7 @@
 
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@/lib/wallet';
-import { Vote, Users, Coins, Shield, Upload, Bolt, ChartLine, Github, Twitter, Video, Instagram, Radio, ShoppingBag } from 'lucide-react';
+import { Vote, Users, Coins, Shield, Upload, Bolt, ChartLine, Github, Twitter, Video, Instagram, Radio, FileText, ShoppingBag, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import { useTelegramMembers } from '@/hooks/useTelegramMembers';
@@ -10,8 +10,6 @@ import { useTokenHolders } from '@/hooks/useTokenHolders';
 import { useProposalCount } from '@/hooks/useProposalCount';
 import { useTokenPrice } from '@/hooks/useTokenPrice';
 import PFPGeneratorSection from '@/components/PFPGeneratorSection';
-import BuyRoot5 from '@/components/BuyRoot5';
-import { StructuredData } from '@/components/StructuredData';
 
 export default function Home() {
   const { connected } = useWallet();
@@ -27,29 +25,8 @@ export default function Home() {
     });
   };
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Root5DAO',
-    description: 'Community-driven meme tokenization on Solana. Submit, vote, and trade the memes that matter.',
-    url: 'https://root5dao.github.io',
-    logo: 'https://root5dao.github.io/layers/pfp_base.png',
-    sameAs: [
-      'https://x.com/i/communities/1986508224624009710',
-      'https://www.reddit.com/r/root5dao/',
-      'https://www.tiktok.com/@root5daocom',
-      'http://instagram.com/root5daocom',
-      'https://www.twitch.tv/root5dao',
-    ],
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'Community Support',
-    },
-  };
-
   return (
     <>
-      <StructuredData data={structuredData} />
       <Header />
       <div className="min-h-screen relative">
         {/* Background SVG */}
@@ -224,7 +201,7 @@ export default function Home() {
         {/* Token Info Section */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 items-start">
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
               <div className="text-center lg:text-left order-2 lg:order-1">
                 <div className="glass-effect rounded-xl p-6 sm:p-8 card-hover">
                   <div className="grid grid-cols-3 gap-3 sm:gap-4">
@@ -259,7 +236,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="space-y-6 order-1 lg:order-2 lg:col-span-1">
+              <div className="space-y-6 order-1 lg:order-2">
                 <div>
                   <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Root5DAO Token</h2>
                   <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
@@ -334,11 +311,189 @@ export default function Home() {
                   </a>
                 </div>
               </div>
-              
-              {/* Buy ROOT5 Component */}
-              <div className="order-3 lg:col-span-1 lg:sticky lg:top-24">
-                <BuyRoot5 />
-              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Press Releases Section */}
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Press Releases</h2>
+              <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">Latest news and announcements</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Example Press Release - Replace with actual data */}
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-effect rounded-xl p-6 card-hover group"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 glass-effect-subtle rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FileText className="h-8 w-8 text-green-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-green-400 transition-colors">
+                      Root5DAO Launches
+                    </h3>
+                    <p className="text-xs text-gray-400">January 2025</p>
+                  </div>
+                  <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-green-400 transition-colors flex-shrink-0" />
+                </div>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  Community-driven meme tokenization platform launches on Solana...
+                </p>
+              </a>
+
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-effect rounded-xl p-6 card-hover group"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 glass-effect-subtle rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FileText className="h-8 w-8 text-green-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-green-400 transition-colors">
+                      Token Launch
+                    </h3>
+                    <p className="text-xs text-gray-400">December 2024</p>
+                  </div>
+                  <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-green-400 transition-colors flex-shrink-0" />
+                </div>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  ROOT5 token goes live on Pump.fun with community governance...
+                </p>
+              </a>
+
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-effect rounded-xl p-6 card-hover group"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 glass-effect-subtle rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FileText className="h-8 w-8 text-green-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-green-400 transition-colors">
+                      Partnership Announcement
+                    </h3>
+                    <p className="text-xs text-gray-400">November 2024</p>
+                  </div>
+                  <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-green-400 transition-colors flex-shrink-0" />
+                </div>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  Root5DAO partners with leading DeFi platforms...
+                </p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Merch Section */}
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Featured Merch</h2>
+              <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">Show your support with Root5DAO merchandise</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Example Merch Item - Replace with actual data */}
+              <a
+                href="https://merch.root5dao.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-effect rounded-xl p-6 card-hover group"
+              >
+                <div className="w-full h-48 glass-effect-subtle rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                  <ShoppingBag className="h-16 w-16 text-gray-400 group-hover:text-green-400 transition-colors" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors">
+                  Root5DAO T-Shirt
+                </h3>
+                <p className="text-sm text-gray-400 mb-3">Premium quality cotton</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-green-400 font-semibold">Shop Now</span>
+                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-green-400 transition-colors" />
+                </div>
+              </a>
+
+              <a
+                href="https://merch.root5dao.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-effect rounded-xl p-6 card-hover group"
+              >
+                <div className="w-full h-48 glass-effect-subtle rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                  <ShoppingBag className="h-16 w-16 text-gray-400 group-hover:text-green-400 transition-colors" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors">
+                  Hoodie Collection
+                </h3>
+                <p className="text-sm text-gray-400 mb-3">Comfortable & stylish</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-green-400 font-semibold">Shop Now</span>
+                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-green-400 transition-colors" />
+                </div>
+              </a>
+
+              <a
+                href="https://merch.root5dao.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-effect rounded-xl p-6 card-hover group"
+              >
+                <div className="w-full h-48 glass-effect-subtle rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                  <ShoppingBag className="h-16 w-16 text-gray-400 group-hover:text-green-400 transition-colors" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors">
+                  Accessories
+                </h3>
+                <p className="text-sm text-gray-400 mb-3">Hats, stickers & more</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-green-400 font-semibold">Shop Now</span>
+                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-green-400 transition-colors" />
+                </div>
+              </a>
+
+              <a
+                href="https://merch.root5dao.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-effect rounded-xl p-6 card-hover group"
+              >
+                <div className="w-full h-48 glass-effect-subtle rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                  <ShoppingBag className="h-16 w-16 text-gray-400 group-hover:text-green-400 transition-colors" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors">
+                  Limited Edition
+                </h3>
+                <p className="text-sm text-gray-400 mb-3">Exclusive designs</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-green-400 font-semibold">Shop Now</span>
+                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-green-400 transition-colors" />
+                </div>
+              </a>
+            </div>
+
+            <div className="text-center mt-8">
+              <a
+                href="https://merch.root5dao.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary text-base inline-flex items-center gap-2"
+              >
+                <ShoppingBag className="h-5 w-5" />
+                View All Merchandise
+              </a>
             </div>
           </div>
         </section>
@@ -444,21 +599,9 @@ export default function Home() {
                 <Link href="#" className="text-gray-300 hover:text-gray-300 transition-colors font-medium">Contact</Link>
               </div>
               
-              <div className="flex justify-center mb-8">
-                <a
-                  href="https://merch.root5dao.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary text-base px-6 py-3 inline-flex items-center gap-2"
-                >
-                  <ShoppingBag className="h-5 w-5" />
-                  Shop Merch
-                </a>
-              </div>
-              
               <div className="flex justify-center gap-6 mb-8">
                 <Link 
-                  href="https://www.reddit.com/r/root5dao/" 
+                  href="https://reddit.com/r/root5daocom" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-gray-300 transition-colors group"
@@ -478,7 +621,7 @@ export default function Home() {
                   <Twitter className="h-6 w-6 group-hover:scale-110 transition-transform duration-200" />
                 </Link>
                 <Link 
-                  href="https://www.tiktok.com/@root5daocom" 
+                  href="https://tiktok.com/root5daocom" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-gray-300 transition-colors group"
@@ -503,17 +646,6 @@ export default function Home() {
                   aria-label="Watch us on Twitch"
                 >
                   <Radio className="h-6 w-6 group-hover:scale-110 transition-transform duration-200" />
-                </Link>
-                <Link 
-                  href="https://bitcointalk.org/index.php?topic=5565567.msg66053550#msg66053550" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-gray-300 transition-colors group"
-                  aria-label="Visit us on BitcoinTalk"
-                >
-                  <svg className="h-6 w-6 group-hover:scale-110 transition-transform duration-200" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.243 15.533.362 9.105 1.962 2.67 8.475-1.243 14.9.358c6.43 1.605 10.342 8.118 8.738 14.547M12.814 3.29c-5.283-.746-10.054 2.849-10.8 8.132-.746 5.283 2.849 10.054 8.132 10.8 5.283.746 10.054-2.849 10.8-8.132.746-5.283-2.849-10.054-8.132-10.8m1.95 2.21c.358.05.7.15 1.02.3.32.15.6.35.84.59.24.24.44.52.59.84.15.32.25.66.3 1.02.05.36.05.72 0 1.08-.05.36-.15.7-.3 1.02-.15.32-.35.6-.59.84-.24.24-.52.44-.84.59-.32.15-.66.25-1.02.3-.36.05-.72.05-1.08 0-.36-.05-.7-.15-1.02-.3-.32-.15-.6-.35-.84-.59-.24-.24-.44-.52-.59-.84-.15-.32-.25-.66-.3-1.02-.05-.36-.05-.72 0-1.08.05-.36.15-.7.3-1.02.15-.32.35-.6.59-.84.24-.24.52-.44.84-.59.32-.15.66-.25 1.02-.3.36-.05.72-.05 1.08 0z"/>
-                  </svg>
                 </Link>
               </div>
               
