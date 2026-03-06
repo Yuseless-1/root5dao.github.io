@@ -9,6 +9,7 @@ import { fetchProposals } from '../services/supabasePublic';
 interface ProposalsProps {
   wallet: WalletState;
   signLogin: () => void;
+  onOpenWalletModal: () => void;
 }
 
 const MOCK_PROPOSALS: Proposal[] = [
@@ -58,7 +59,7 @@ const MOCK_PROPOSALS: Proposal[] = [
 
 const NONCE_MSG = (nonce: string) => `Sign this nonce to authenticate your action: ${nonce}`;
 
-const Proposals: React.FC<ProposalsProps> = ({ wallet, signLogin }) => {
+const Proposals: React.FC<ProposalsProps> = ({ wallet, signLogin, onOpenWalletModal }) => {
   const [filter, setFilter] = useState<string>('All');
   const [showNewProposalForm, setShowNewProposalForm] = useState(false);
   const [proposals, setProposals] = useState<Proposal[]>(MOCK_PROPOSALS);
@@ -159,7 +160,7 @@ const Proposals: React.FC<ProposalsProps> = ({ wallet, signLogin }) => {
           Please authenticate with your wallet to view active proposals and participate in Root5 DAO governance.
         </p>
         <button
-          onClick={signLogin}
+          onClick={wallet.isConnected ? signLogin : onOpenWalletModal}
           className="bg-green-500 hover:bg-green-600 text-black px-10 py-4 rounded-xl font-bold transition-all shadow-xl shadow-green-500/20 active:scale-95"
         >
           {wallet.isConnected ? 'Sign Message' : 'Connect & Authenticate'}

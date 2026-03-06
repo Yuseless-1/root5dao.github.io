@@ -63,11 +63,18 @@ async function getTokenAccounts(address) {
 async function getJupiterPrices(ids) {
   if (!ids.length) return {};
   try {
-    const url = `https://price.jup.ag/v6/price?ids=${ids.join(',')}`;
+    const url = `https://api.jup.ag/price/v2?ids=${ids.join(',')}`;
     const resp = await fetch(url, { signal: AbortSignal.timeout(5000) });
     if (!resp.ok) return {};
     const json = await resp.json();
-    return json?.data ?? {};
+    // v2 returns price as a string — normalise to number
+    const data = json?.data ?? {};
+    for (const key of Object.keys(data)) {
+      if (data[key]?.price !== undefined) {
+        data[key].price = parseFloat(data[key].price) || 0;
+      }
+    }
+    return data;
   } catch (err) {
     console.error('Jupiter price fetch failed:', err?.message);
     return {};

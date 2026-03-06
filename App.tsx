@@ -60,8 +60,9 @@ const App: React.FC = () => {
   const connectSolana = async () => {
     setShowWalletModal(false);
     try {
-      if (!window.solana) throw new Error('Phantom not found');
-      const resp = await window.solana.connect();
+      const solana = window.solana ?? (window as any).phantom?.solana;
+      if (!solana) throw new Error('Phantom not found');
+      const resp = await solana.connect();
       const address: string = resp.publicKey.toString();
       setWallet({ address, isConnected: true, isSigned: false, chain: 'solana' });
     } catch (err: any) {
@@ -87,8 +88,9 @@ const App: React.FC = () => {
         const signer = await provider.getSigner();
         await signer.signMessage(message);
       } else {
+        const solana = window.solana ?? (window as any).phantom?.solana;
         const encoded = new TextEncoder().encode(message);
-        await window.solana.signMessage(encoded, 'utf8');
+        await solana.signMessage(encoded, 'utf8');
       }
 
       setWallet(prev => ({ ...prev, isSigned: true }));
@@ -102,8 +104,9 @@ const App: React.FC = () => {
   };
 
   const disconnectWallet = () => {
-    if (wallet.chain === 'solana' && window.solana?.disconnect) {
-      window.solana.disconnect().catch(() => {});
+    const solana = window.solana ?? (window as any).phantom?.solana;
+    if (wallet.chain === 'solana' && solana?.disconnect) {
+      solana.disconnect().catch(() => {});
     }
     setWallet({ address: null, isConnected: false, isSigned: false, chain: null });
   };
@@ -123,7 +126,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route
               path="/proposals"
-              element={<Proposals wallet={wallet} signLogin={signLogin} />}
+              element={<Proposals wallet={wallet} signLogin={signLogin} onOpenWalletModal={() => setShowWalletModal(true)} />}
             />
             <Route
               path="/voting/:id"

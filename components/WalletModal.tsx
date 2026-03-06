@@ -8,7 +8,9 @@ interface WalletModalProps {
 
 const WalletModal: React.FC<WalletModalProps> = ({ onClose, onSelectEvm, onSelectSolana }) => {
   const hasMetaMask = typeof window !== 'undefined' && Boolean(window.ethereum);
-  const hasPhantom  = typeof window !== 'undefined' && Boolean((window as any).solana?.isPhantom);
+  const hasPhantom  = typeof window !== 'undefined' && Boolean(
+    (window as any).solana?.isPhantom || (window as any).phantom?.solana?.isPhantom
+  );
 
   return (
     <div
